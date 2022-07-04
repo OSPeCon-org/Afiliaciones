@@ -1,4 +1,4 @@
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Exceptions
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Exceptions
 {
     public interface INotFoundException
     {

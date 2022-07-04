@@ -1,7 +1,7 @@
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.SeedWork
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.SeedWork
 {
     using MediatR;
-    using OSPeConTI.BackEndBase.Services.CursosService.Domain.SeedWork;
+    using OSPeConTI.Afiliaciones.Services.CursosService.Domain.SeedWork;
     using System;
     using System.Collections.Generic;
 

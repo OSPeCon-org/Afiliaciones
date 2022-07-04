@@ -1,4 +1,4 @@
-﻿namespace OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF;
+﻿namespace OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
 
 public class IntegrationEventLogContext : DbContext
 {

@@ -1,11 +1,11 @@
 using MediatR;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Entities;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Commands
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Commands
 {
     // Regular CommandHandler
     public class UpdateClasificacionCommandHandler : IRequestHandler<UpdateClasificacionCommand, bool>

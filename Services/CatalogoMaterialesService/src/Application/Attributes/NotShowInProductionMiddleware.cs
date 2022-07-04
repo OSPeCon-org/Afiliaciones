@@ -1,4 +1,4 @@
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Attributes
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Attributes
 {
     public class NotShowInProductionAttribute : System.Attribute
 

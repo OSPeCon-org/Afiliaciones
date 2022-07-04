@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.SeedWork
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.SeedWork
 {
     public abstract class Enumeration : IComparable
     {

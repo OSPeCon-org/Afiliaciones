@@ -1,20 +1,20 @@
 using MediatR;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Entities;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Exceptions;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Events;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Abstractions;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.IntegrationEvents;
-using OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF.Services;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Exceptions;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Events;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Abstractions;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.IntegrationEvents;
+using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF.Services;
 using System.Data.Common;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Infrastructure;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Commands
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Commands
 {
     // Regular CommandHandler
     public class UpdateMaterialesCommandHandler : IRequestHandler<UpdateMaterialesCommand, bool>

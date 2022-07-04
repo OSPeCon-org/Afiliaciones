@@ -1,4 +1,4 @@
-﻿namespace OSPeConTI.BackEndBase.BuildingBlocks.EventBusRabbitMQ;
+﻿namespace OSPeConTI.Afiliaciones.BuildingBlocks.EventBusRabbitMQ;
 
 public interface IRabbitMQPersistentConnection
     : IDisposable

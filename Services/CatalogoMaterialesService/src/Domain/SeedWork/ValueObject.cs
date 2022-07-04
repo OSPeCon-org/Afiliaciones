@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.SeedWork
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.SeedWork
 {
     public abstract class ValueObject
     {

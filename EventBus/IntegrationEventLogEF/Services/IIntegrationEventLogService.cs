@@ -1,4 +1,4 @@
-﻿namespace OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF.Services;
+﻿namespace OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF.Services;
 
 public interface IIntegrationEventLogService
 {

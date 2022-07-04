@@ -1,15 +1,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Commands;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Queries;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Commands;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Queries;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application
 {
     [Route("api/v1/[controller]")]
     [ApiController]

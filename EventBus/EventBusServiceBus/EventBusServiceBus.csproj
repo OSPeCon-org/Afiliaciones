@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>OSPeConTI.BackEndBase.BuildingBlocks.EventBusServiceBus</RootNamespace>
+    <RootNamespace>OSPeConTI.Afiliaciones.BuildingBlocks.EventBusServiceBus</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

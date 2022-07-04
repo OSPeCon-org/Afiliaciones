@@ -1,4 +1,4 @@
-﻿namespace OSPeConTI.BackEndBase.BuildingBlocks.EventBusServiceBus;
+﻿namespace OSPeConTI.Afiliaciones.BuildingBlocks.EventBusServiceBus;
 
 public class DefaultServiceBusPersisterConnection : IServiceBusPersisterConnection
 {

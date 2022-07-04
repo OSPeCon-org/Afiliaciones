@@ -11,34 +11,34 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.OData.Edm;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Helper;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Infrastructure;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Helper;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Reflection;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Entities;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Infrastructure.Repositories;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Queries;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Entities;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Infrastructure.Repositories;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Queries;
 using System;
 using Microsoft.OpenApi.Models;
 using OData.Swagger.Services;
 using System.Collections.Generic;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Middlewares;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Exceptions;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Exceptions;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Abstractions;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBusRabbitMQ;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Middlewares;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Exceptions;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Exceptions;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Abstractions;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBusRabbitMQ;
 using Autofac;
 using Microsoft.Extensions.Logging;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus;
 using RabbitMQ.Client;
 using Autofac.Extensions.DependencyInjection;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.IntegrationEvents;
-using OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF;
-using OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF.Services;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.IntegrationEvents;
+using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
+using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF.Services;
 using System.Data.Common;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application
 {
     public class Startup
     {

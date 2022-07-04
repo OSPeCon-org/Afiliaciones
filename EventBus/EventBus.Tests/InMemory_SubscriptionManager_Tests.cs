@@ -1,4 +1,4 @@
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus;
 using System;
 using System.Linq;
 using Xunit;

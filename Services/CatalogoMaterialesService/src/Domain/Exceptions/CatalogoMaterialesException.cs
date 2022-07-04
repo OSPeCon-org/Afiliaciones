@@ -1,6 +1,6 @@
 using System;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Exceptions
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Exceptions
 {
     /// <summary>
     /// Exception type for domain exceptions

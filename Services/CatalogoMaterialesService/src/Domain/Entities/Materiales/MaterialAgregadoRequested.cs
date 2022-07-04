@@ -1,5 +1,5 @@
 using MediatR;
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Entities
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Entities
 {
 
     public class MaterialAgregadoRequested : INotification

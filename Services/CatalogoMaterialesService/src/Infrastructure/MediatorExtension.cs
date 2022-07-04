@@ -1,11 +1,11 @@
 using MediatR;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.SeedWork;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.SeedWork;
 
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Infrastructure
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Infrastructure
 {
     static class MediatorExtension
     {

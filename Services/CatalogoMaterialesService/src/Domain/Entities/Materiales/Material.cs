@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.SeedWork;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Exceptions;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.SeedWork;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Exceptions;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Domain.Entities
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Domain.Entities
 {
     public class Material : Entity, IAggregateRoot
     {

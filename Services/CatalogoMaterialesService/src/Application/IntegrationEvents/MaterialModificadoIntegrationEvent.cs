@@ -1,8 +1,8 @@
 using System;
 using System.Text.Json.Serialization;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Events;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Events;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.IntegrationEvents
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.IntegrationEvents
 {
     public record MaterialModificadoIntegrationEvent : IntegrationEvent
     {

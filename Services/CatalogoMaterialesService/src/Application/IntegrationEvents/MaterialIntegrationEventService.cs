@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Abstractions;
-using OSPeConTI.BackEndBase.BuildingBlocks.EventBus.Events;
-using OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF;
-using OSPeConTI.BackEndBase.BuildingBlocks.IntegrationEventLogEF.Services;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Infrastructure;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Abstractions;
+using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Events;
+using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
+using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF.Services;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Infrastructure;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.IntegrationEvents
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.IntegrationEvents
 {
     public class MaterialIntegrationEventService : IMaterialIntegrationEventService
     {

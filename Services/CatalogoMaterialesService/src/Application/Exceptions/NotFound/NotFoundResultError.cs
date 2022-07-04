@@ -1,8 +1,8 @@
 using System;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Attributes;
-using OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Middlewares;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Attributes;
+using OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Middlewares;
 
-namespace OSPeConTI.BackEndBase.Services.CatalogoMateriales.Application.Exceptions
+namespace OSPeConTI.Afiliaciones.Services.CatalogoMateriales.Application.Exceptions
 {
     public class NotFoundResultError : IResultError
     {
