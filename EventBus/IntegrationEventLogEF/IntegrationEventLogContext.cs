@@ -1,4 +1,6 @@
-﻿namespace OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
 
 public class IntegrationEventLogContext : DbContext
 {
