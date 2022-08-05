@@ -120,6 +120,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped(typeof(IDocumentacionRepository), typeof(DocumentacionRepository));
             services.AddScoped(typeof(IDetalleDocumentacionRepository), typeof(DetalleDocumentacionRepository));
             services.AddScoped(typeof(IAfiliadosDomiciliosRepository), typeof(AfiliadosDomiciliosRepository));
+            services.AddScoped(typeof(IAfiliadosDocumentacionRepository), typeof(AfiliadosDocumentacionRepository));
 
             services.AddScoped<INacionalidadesQueries>(conns => new NacionalidadesQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEstadosCivilesQueries>(conns => new EstadosCivilesQueries(Configuration.GetConnectionString("DefaultConnection")));
@@ -134,7 +135,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped<IDocumentacionQueries>(conns => new DocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDetalleDocumentacionQueries>(conns => new DetalleDocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAfiliadosDomiciliosQueries>(conns => new AfiliadosDomiciliosQueries(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddScoped<IAfiliadosDocumentacionQueries>(conns => new AfiliadosDocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDbContext<AfiliacionesContext>(opt =>
                       opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Application")));

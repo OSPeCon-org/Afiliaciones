@@ -13,34 +13,34 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class DetalleDocumentacionController : ControllerBase
+    public class AfiliadosDocumentacionController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<DetalleDocumentacionController> _logger;
+        private readonly ILogger<AfiliadosDocumentacionController> _logger;
 
-        private readonly IDetalleDocumentacionQueries _detalleDocumentacionQueries;
+        private readonly IAfiliadosDocumentacionQueries _afiliadosDocumentacionQueries;
 
-        public DetalleDocumentacionController(
+        public AfiliadosDocumentacionController(
             IMediator mediator,
-            ILogger<DetalleDocumentacionController> logger,
-            IDetalleDocumentacionQueries detalleDocumentacion)
+            ILogger<AfiliadosDocumentacionController> logger,
+            IAfiliadosDocumentacionQueries afiliados)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _detalleDocumentacionQueries = detalleDocumentacion ?? throw new ArgumentNullException(nameof(detalleDocumentacion));
+            _afiliadosDocumentacionQueries = afiliados ?? throw new ArgumentNullException(nameof(afiliados));
         }
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult> GetDetalleDocumentacionAsync(Guid id)
+        public async Task<ActionResult> GetAfiliadosDocumentacionAsync(Guid id)
         {
             try
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var detalleDocumentacion = await _detalleDocumentacionQueries.GetDetalleDocumentacionAsync(id);
+                var sector = await _afiliadosDocumentacionQueries.GetAfiliadosDocumentacionAsync(id);
 
-                return Ok(detalleDocumentacion);
+                return Ok(sector);
             }
             catch
             {
@@ -49,16 +49,17 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         }
 
 
-        [Route("getByPlanDocumentacion/{planId, parentescoId, discapacidad}")]
+        [Route("getByAfiliadoId/{afiliadoId}")]
         [HttpGet]
-        public async Task<ActionResult> GetDetalleDocumentacionByPlanDocumentacionAsync(Guid planId, Guid parentescoId, bool discapacidad)
+        public async Task<ActionResult> GetAfiliadosDocumentacionByAfiliadosId(Guid afiliadoId)
         {
             try
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var detalleDocumentacion = await _detalleDocumentacionQueries.GetDetalleDocumentacionByPlanParentescoAsync( planId, parentescoId, discapacidad);
-                return Ok(detalleDocumentacion);
+                var afiliado = await _afiliadosDocumentacionQueries.GetAfiliadosDocumentacionByAfiliadoIdAsync(afiliadoId);
+
+                return Ok(afiliado);
             }
             catch
             {
@@ -66,26 +67,28 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             }
         }
 
-        [Route("all")]
+        [Route("getByDocumentacionAfiliado/{afiliadoId}")]
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAfiliadosDocumentacionAfiliado(Guid afiliadoId)
         {
             try
             {
-                var detalleDocumentacion = await _detalleDocumentacionQueries.GetAll();
+                //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
+                //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
+                var afiliado = await _afiliadosDocumentacionQueries.GetDocumentacion(afiliadoId);
 
-                return Ok(detalleDocumentacion);
+                return Ok(afiliado);
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(ex.Message);
                 return NotFound();
             }
         }
+        
 
         [Route("add")]
         [HttpPost]
-        public async Task<IActionResult> addDetalleDocumentacionsAsync([FromBody] AddDetalleDocumentacionCommand command)
+        public async Task<IActionResult> addAfiliadosDocumentacionsAsync([FromBody] AddAfiliadosDocumentacionCommand command)
         {
 
             Guid UID = await _mediator.Send(command);
@@ -98,7 +101,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [AllowAnonymous]
-        public async Task<IActionResult> updateDetalleDocumentacionAsync([FromBody] UpdateDetalleDocumentacionCommand command)
+        public async Task<IActionResult> updateAfiliadosDocumentacionAsync([FromBody] UpdateAfiliadosDocumentacionCommand command)
         {
             bool commandResult = false;
 
