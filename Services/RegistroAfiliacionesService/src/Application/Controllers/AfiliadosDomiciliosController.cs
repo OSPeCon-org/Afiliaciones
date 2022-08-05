@@ -18,7 +18,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         private readonly IMediator _mediator;
         private readonly ILogger<AfiliadosDomiciliosController> _logger;
 
-        private readonly IAfiliadosDomiciliosQueries _afiliadosQueries;
+        private readonly IAfiliadosDomiciliosQueries _afiliadosDomiciliosQueries;
 
         public AfiliadosDomiciliosController(
             IMediator mediator,
@@ -27,7 +27,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _afiliadosQueries = afiliados ?? throw new ArgumentNullException(nameof(afiliados));
+            _afiliadosDomiciliosQueries = afiliados ?? throw new ArgumentNullException(nameof(afiliados));
         }
 
         [Route("{id}")]
@@ -38,7 +38,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var sector = await _afiliadosQueries.GetAfiliadosDomiciliosAsync(id);
+                var sector = await _afiliadosDomiciliosQueries.GetAfiliadosDomiciliosAsync(id);
 
                 return Ok(sector);
             }
@@ -51,13 +51,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         [Route("getByAfiliadoId/{afiliadoId}")]
         [HttpGet]
-        public async Task<ActionResult> GetAfiliadosDomiciliosByAfiliadosIdAsync(Guid afiliadoId)
+        public async Task<ActionResult> GetAfiliadosDomiciliosByAfiliadosId(Guid afiliadoId)
         {
             try
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var afiliado = await _afiliadosQueries.GetAfiliadosDomiciliosByAfiliadoIdAsync(afiliadoId);
+                var afiliado = await _afiliadosDomiciliosQueries.GetAfiliadosDomiciliosByAfiliadoIdAsync(afiliadoId);
 
                 return Ok(afiliado);
             }

@@ -18,16 +18,16 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         private readonly IMediator _mediator;
         private readonly ILogger<EstadosAfiliacionController> _logger;
 
-        private readonly IEstadosAfiliacionQueries _parentescosQueries;
+        private readonly IEstadosAfiliacionQueries _estadosAfiliacionQueries;
 
         public EstadosAfiliacionController(
             IMediator mediator,
             ILogger<EstadosAfiliacionController> logger,
-            IEstadosAfiliacionQueries parentescos)
+            IEstadosAfiliacionQueries estadosAfiliacion)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _parentescosQueries = parentescos ?? throw new ArgumentNullException(nameof(parentescos));
+            _estadosAfiliacionQueries = estadosAfiliacion ?? throw new ArgumentNullException(nameof(estadosAfiliacion));
         }
 
         [Route("{id}")]
@@ -38,9 +38,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var parentesco = await _parentescosQueries.GetEstadosAfiliacionAsync(id);
+                var estadoAfiliacion = await _estadosAfiliacionQueries.GetEstadosAfiliacionAsync(id);
 
-                return Ok(parentesco);
+                return Ok(estadoAfiliacion);
             }
             catch
             {
@@ -57,9 +57,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var parentesco = await _parentescosQueries.GetEstadosAfiliacionByNameAsync(descripcion);
+                var estadoAfiliacion = await _estadosAfiliacionQueries.GetEstadosAfiliacionByNameAsync(descripcion);
 
-                return Ok(parentesco);
+                return Ok(estadoAfiliacion);
             }
             catch
             {
@@ -73,9 +73,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         {
             try
             {
-                var parentescos = await _parentescosQueries.GetAll();
+                var estadosAfiliacion = await _estadosAfiliacionQueries.GetAll();
 
-                return Ok(parentescos);
+                return Ok(estadosAfiliacion);
             }
             catch (Exception ex)
             {

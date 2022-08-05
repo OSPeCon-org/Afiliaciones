@@ -9,7 +9,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public EstadoAfiliacionDTO()
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            Descripcion = "SIN CLASIFICACION";
+            Descripcion = "";
             
         }
         public Guid Id { get; set; }

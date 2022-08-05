@@ -26,7 +26,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                    @"SELECT c.Id, c.Descripcion
-                    FROM     dbo.EstadoAfiliacion c where c.Id = @id;"
+                    FROM     dbo.EstadosAfiliacion c where c.Id = @id;"
                     , new { id });
 
                 var estadoAfiliacion = multiple.Read<EstadoAfiliacionDTO>().First();
@@ -46,8 +46,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                   @"SELECT c.Id, c.Descripcion, c.CodigoSSS
-                    FROM     dbo.EstadoAfiliacion c where c.Descripcion like '%' + @descripcion + '%' Order by c.Descripcion;"
+                   @"SELECT c.Id, c.Descripcion
+                    FROM     dbo.EstadosAfiliacion c where c.Descripcion like '%' + @descripcion + '%' Order by c.Descripcion;"
                     , new { descripcion });
 
                 var estadoAfiliacion = multiple.Read<EstadoAfiliacionDTO>().ToList();
@@ -66,8 +66,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                    @"SELECT c.Id, c.Descripcion, c.CodigoSSS
-                    FROM     dbo.EstadoAfiliacion c Order by c.Descripcion desc;");
+                    @"SELECT c.Id, c.Descripcion
+                    FROM     dbo.EstadosAfiliacion c Order by c.Descripcion desc;");
 
                 var estadoAfiliacion = multiple.Read<EstadoAfiliacionDTO>().ToList();
 
