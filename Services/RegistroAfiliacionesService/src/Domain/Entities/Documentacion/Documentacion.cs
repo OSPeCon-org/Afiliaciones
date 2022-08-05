@@ -9,25 +9,26 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
     public class Documentacion : Entity, IAggregateRoot
     {
         public string Descripcion { get; set; }
-        public bool Obligatorio { get; set; }
+        
         public bool Discapacidad { get; set; }
+        public List<DetalleDocumentacion> DetallesDocumentacion { get; set; }
         
 
 
         public Documentacion()
         {
         }
-        public Documentacion(string descripcion, bool obligatorio, bool discapacidad) : this()
+        public Documentacion(string descripcion, bool discapacidad) : this()
         {
-            Descripcion = descripcion;
-            Obligatorio=obligatorio;
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
+            Descripcion = descripcion;          
             Discapacidad=discapacidad;
         }
-        public void Update(Guid id, string descripcion, bool obligatorio, bool discapacidad)
+        public void Update(Guid id, string descripcion, bool discapacidad)
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Id = id;
-            Descripcion = descripcion;
-            Obligatorio=obligatorio;
+            Descripcion = descripcion;            
             Discapacidad=discapacidad;
         }
     }

@@ -35,7 +35,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
             return _context.Documentacion.Update(documentacion).Entity;
         }
 
-        public async Task<Documentacion> GetAsync(Guid id)
+        public async Task<Documentacion> GetByIdAsync(Guid id)
         {
             var item = await _context
                                 .Documentacion
@@ -59,12 +59,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
 
             return clasif;
         }
-
-        public Task<Documentacion> GetByIdAsync(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
-
 
     }
 }

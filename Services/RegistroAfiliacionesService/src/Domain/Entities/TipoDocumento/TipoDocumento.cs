@@ -18,11 +18,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public TipoDocumento(string descripcion, string codigoSSS) : this()
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Descripcion = descripcion;
             CodigoSSS = codigoSSS;
         }
         public void Update(Guid id, string descripcion, string codigoSSS)
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Id = id;
             Descripcion = descripcion;
             CodigoSSS = codigoSSS;

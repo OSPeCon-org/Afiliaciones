@@ -28,6 +28,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
         public DbSet<Localidades> Localidades { get; set; }
         public DbSet<EstadosAfiliacion> EstadosAfiliacion { get; set; }
         public DbSet<Documentacion> Documentacion { get; set; }
+        public DbSet<DetalleDocumentacion> DetalleDocumentacion { get; set; }
+        public DbSet<AfiliadosDomicilios> AfiliadosDomicilios { get; set; }
         private readonly IMediator _mediator;
         private IDbContextTransaction _currentTransaction;
 
@@ -58,6 +60,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
             modelBuilder.ApplyConfiguration(new LocalidadesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EstadosAfiliacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentacionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DetalleDocumentacionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AfiliadosDomiciliosEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))

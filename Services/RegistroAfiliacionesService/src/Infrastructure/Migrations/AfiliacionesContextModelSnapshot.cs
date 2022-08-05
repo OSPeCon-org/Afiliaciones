@@ -105,6 +105,105 @@ namespace Infrastructure.Migrations
                     b.ToTable("Afiliados", "dbo");
                 });
 
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosDomicilios", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("AfiliadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Altura")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Calle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPostal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Departamento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaAlta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LegacyId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("LocalidadesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Piso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioAlta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioUpdate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AfiliadosId");
+
+                    b.HasIndex("LocalidadesId");
+
+                    b.ToTable("AfiliadosDomicilios", "dbo");
+                });
+
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.DetalleDocumentacion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("DocumentacionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaAlta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LegacyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Obligatorio")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ParentescoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlanId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UsuarioAlta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioUpdate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentacionId");
+
+                    b.HasIndex("PlanId");
+
+                    b.ToTable("DetalleDocumentacion", "dbo");
+                });
+
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Documentacion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -128,9 +227,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("LegacyId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Obligatorio")
-                        .HasColumnType("bit");
 
                     b.Property<string>("UsuarioAlta")
                         .HasColumnType("nvarchar(max)");
@@ -479,6 +575,44 @@ namespace Infrastructure.Migrations
                     b.Navigation("TipoDocumento");
                 });
 
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosDomicilios", b =>
+                {
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Afiliados", "Afiliado")
+                        .WithMany()
+                        .HasForeignKey("AfiliadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Localidades", "Localidad")
+                        .WithMany()
+                        .HasForeignKey("LocalidadesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Afiliado");
+
+                    b.Navigation("Localidad");
+                });
+
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.DetalleDocumentacion", b =>
+                {
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Documentacion", "Documentacion")
+                        .WithMany("DetallesDocumentacion")
+                        .HasForeignKey("DocumentacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Planes", "Plan")
+                        .WithMany("DetalleDocumentacion")
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Documentacion");
+
+                    b.Navigation("Plan");
+                });
+
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Localidades", b =>
                 {
                     b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Provincias", "Provincia")
@@ -488,6 +622,11 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Provincia");
+                });
+
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Documentacion", b =>
+                {
+                    b.Navigation("DetallesDocumentacion");
                 });
 
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.EstadosAfiliacion", b =>
@@ -513,6 +652,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Planes", b =>
                 {
                     b.Navigation("Afiliados");
+
+                    b.Navigation("DetalleDocumentacion");
                 });
 
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Provincias", b =>

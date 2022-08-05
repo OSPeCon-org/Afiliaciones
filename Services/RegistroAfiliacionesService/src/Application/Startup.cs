@@ -118,6 +118,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped(typeof(ILocalidadesRepository), typeof(LocalidadesRepository));
             services.AddScoped(typeof(IEstadosAfiliacionRepository), typeof(EstadosAfiliacionRepository));
             services.AddScoped(typeof(IDocumentacionRepository), typeof(DocumentacionRepository));
+            services.AddScoped(typeof(IDetalleDocumentacionRepository), typeof(DetalleDocumentacionRepository));
+            services.AddScoped(typeof(IAfiliadosDomiciliosRepository), typeof(AfiliadosDomiciliosRepository));
 
             services.AddScoped<INacionalidadesQueries>(conns => new NacionalidadesQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEstadosCivilesQueries>(conns => new EstadosCivilesQueries(Configuration.GetConnectionString("DefaultConnection")));
@@ -130,6 +132,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped<IParentescosQueries>(conns => new ParentescosQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEstadosAfiliacionQueries>(conns => new EstadosAfiliacionQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDocumentacionQueries>(conns => new DocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IDetalleDocumentacionQueries>(conns => new DetalleDocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAfiliadosDomiciliosQueries>(conns => new AfiliadosDomiciliosQueries(Configuration.GetConnectionString("DefaultConnection")));
 
             
             services.AddDbContext<AfiliacionesContext>(opt =>

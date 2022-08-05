@@ -11,6 +11,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public string Descripcion { get; set; }
         public string CodigoSSS { get; set; }
         public List<Afiliados> Afiliados { get; set; }
+        public List<DetalleDocumentacion> DetalleDocumentacion { get; set; }
 
 
         public Planes()
@@ -18,11 +19,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public Planes(string descripcion, string codigoSSS) : this()
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Descripcion = descripcion;
             CodigoSSS = codigoSSS;
         }
         public void Update(Guid id, string descripcion, string codigoSSS)
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Id = id;
             Descripcion = descripcion;
             CodigoSSS = codigoSSS;

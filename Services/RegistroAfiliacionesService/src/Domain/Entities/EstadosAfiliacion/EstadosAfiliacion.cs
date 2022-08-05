@@ -18,11 +18,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public EstadosAfiliacion(string descripcion) : this()
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Descripcion = descripcion;
             
         }
         public void Update(Guid id, string descripcion)
         {
+            if (string.IsNullOrEmpty(descripcion)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
             Id = id;
             Descripcion = descripcion;
            

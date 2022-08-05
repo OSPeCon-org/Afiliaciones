@@ -53,11 +53,11 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
 
         public async Task<Afiliados> GetByDocumentoAsync(int documento)
         {
-            var clasif = await _context
+            var afiliado = await _context
                     .Afiliados
                     .FirstOrDefaultAsync(o => o.Documento == documento);
 
-            return clasif;
+            return afiliado;
         }
 
     }

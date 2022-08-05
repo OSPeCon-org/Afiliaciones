@@ -25,8 +25,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                   @"SELECT c.Id, c.Descripcion
-                    FROM     dbo.Documentacion c where c.Id = @id;"
+                   @"SELECT d.*
+                    FROM     dbo.Documentacion d where d.Id = @id;"
                     , new { id });
 
                 var documentacion = multiple.Read<DocumentacionDTO>().First();
@@ -46,8 +46,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                   @"SELECT c.Id, c.Descripcion, c.CodigoSSS
-                    FROM     dbo.Documentacion c where c.Descripcion like '%' + @descripcion + '%' Order by c.Descripcion;"
+                   @"SELECT d.*
+                    FROM     dbo.Documentacion d where c.Descripcion like '%' + @descripcion + '%' Order by c.Descripcion;"
                     , new { descripcion });
 
                 var documentacion = multiple.Read<DocumentacionDTO>().ToList();
@@ -66,8 +66,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                    @"SELECT c.Id, c.Descripcion, c.CodigoSSS
-                    FROM     dbo.Documentacion c Order by c.Descripcion desc;");
+                    @"SELECT d.*
+                    FROM     dbo.Documentacion d Order by d.Descripcion desc;");
 
                 var documentaciones = multiple.Read<DocumentacionDTO>().ToList();
 
