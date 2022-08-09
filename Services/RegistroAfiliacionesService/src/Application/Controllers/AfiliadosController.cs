@@ -50,13 +50,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         [Route("getByName/{descripcion}")]
         [HttpGet]
-        public async Task<ActionResult> GetAfiliadosByNameAsync(string descripcion)
+        public async Task<ActionResult> GetAfiliadosByNameAsync(string nombre)
         {
             try
             {
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var afiliado = await _afiliadosQueries.GetAfiliadosByNameAsync(descripcion);
+                var afiliado = await _afiliadosQueries.GetAfiliadosByNameAsync(nombre);
 
                 return Ok(afiliado);
             }

@@ -28,12 +28,14 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    @"SELECT top 200 a.Id, a.Apellido, a.Nombre, a.TipoDocumentoId, d.Descripcion as TipoDocumentoNombre, 
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
-                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre
+                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
+                   ea.Descripcion as EstadosAfiliacionNombre
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
+                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     where a.Id = @id;"
                     , new { id });
 
@@ -57,12 +59,14 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 @"SELECT top 200 a.Id, a.Apellido, a.Nombre, a.TipoDocumentoId, d.Descripcion as TipoDocumentoNombre, 
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
-                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre
+                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
+                   ea.Descripcion as EstadosAfiliacionNombre
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
+                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     where ltrim(rtrim(a.Apellido)) + ' ' + ltrim(rtrim(a.Nombre)) like '%' + @nombre + '%' Order by a.Apellido, a.Nombre ;"
                     , new { nombre });
 
@@ -85,12 +89,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                     @"SELECT top 200 a.Id, a.Apellido, a.Nombre, a.TipoDocumentoId, d.Descripcion as TipoDocumentoNombre, 
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
-                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre
+                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
+                   ea.Descripcion as EstadosAfiliacionNombre
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
-                    inner join Nacionalidades n on a.NacionalidadId=n.Id Order by a.Apellido, a.Nombre;");
+                    inner join Nacionalidades n on a.NacionalidadId=n.Id 
+                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
+                    Order by a.Apellido, a.Nombre;");
 
                 var afiliados = multiple.Read<AfiliadosDTO>().ToList();
 

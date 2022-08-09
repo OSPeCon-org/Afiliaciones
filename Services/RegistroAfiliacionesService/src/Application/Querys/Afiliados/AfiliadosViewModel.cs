@@ -26,6 +26,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             Discapacitado=false;
             NacionalidadId=Guid.Empty;
             NacionalidadNombre="";
+            EstadosAfiliacionId=Guid.Empty;
+            EstadosAfiliacionNombre="";
         }
         public Guid Id { get; set; }
         public string Apellido { get; set; }
@@ -46,6 +48,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public bool Discapacitado { get; set; }
         public Guid NacionalidadId { get; set; }
         public string NacionalidadNombre { get; set; }
+        public Guid EstadosAfiliacionId { get; set; }
+        public string EstadosAfiliacionNombre { get; set; }
 
 
     }
