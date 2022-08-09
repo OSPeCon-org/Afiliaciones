@@ -20,8 +20,10 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public AfiliadosDocumentacion(Guid afiliadosId, Guid detalleDocumentacionId, string url, bool aprobado) : this()
         {
-            //if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La calle no puede estar vacía");
-            
+
+            if (afiliadosId == Guid.Empty) throw new System.InvalidOperationException("El Afiliado no puede estar vacío");
+            if (detalleDocumentacionId == Guid.Empty) throw new System.InvalidOperationException("La documentación no puede estar vacía");
+
             AfiliadosId = afiliadosId;
             DetalleDocumentacionId= detalleDocumentacionId;
             URL=url;
@@ -30,7 +32,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public void Update(Guid id,Guid afiliadosId, Guid detalleDocumentacionId, string url, bool aprobado)
         {
-            //if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
+            if (afiliadosId == Guid.Empty) throw new System.InvalidOperationException("El Afiliado no puede estar vacío");
+            if (detalleDocumentacionId == Guid.Empty) throw new System.InvalidOperationException("La documentación no puede estar vacía");
             Id = id;
             AfiliadosId = afiliadosId;
             DetalleDocumentacionId= detalleDocumentacionId;

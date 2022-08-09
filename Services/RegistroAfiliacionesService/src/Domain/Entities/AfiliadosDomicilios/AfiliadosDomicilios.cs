@@ -24,7 +24,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public AfiliadosDomicilios(Guid afiliadosId, string calle, string altura, string piso, string departamento, Guid localidadesId, string codigoPostal) : this()
         {
             if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La calle no puede estar vacía");
-            
+            if (localidadesId == Guid.Empty) throw new System.InvalidOperationException("Debe Informar la localidad");
+
             AfiliadosId = afiliadosId;
             Calle = calle;
             Altura=altura;
@@ -36,6 +37,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public void Update(Guid id, Guid afiliadosId, string calle, string altura, string piso, string departamento, Guid localidadesId, string codigoPostal)
         {
             if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
+            if (localidadesId == Guid.Empty) throw new System.InvalidOperationException("Debe Informar la localidad");
             Id = id;
             AfiliadosId = afiliadosId;
             Calle = calle;

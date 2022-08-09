@@ -24,6 +24,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
                       
             if (planId == Guid.Empty) throw new System.InvalidOperationException("El Plan no puede estar vacío");
             if (parentescoId == Guid.Empty) throw new System.InvalidOperationException("El Parentesco no puede estar vacío");
+            if (documentacionId == Guid.Empty) throw new System.InvalidOperationException("La documentación no puede estar vacía");
  
             PlanId=planId;
             ParentescoId=parentescoId;
@@ -32,6 +33,10 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         }
         public void Update(Guid id, Guid planId, Guid parentescoId, Guid documentacionId, bool obligatorio)
         {
+           if (planId == Guid.Empty) throw new System.InvalidOperationException("El Plan no puede estar vacío");
+            if (parentescoId == Guid.Empty) throw new System.InvalidOperationException("El Parentesco no puede estar vacío");
+            if (documentacionId == Guid.Empty) throw new System.InvalidOperationException("La documentación no puede estar vacía");
+             
             Id = id;
             PlanId=planId;
             ParentescoId=parentescoId;
