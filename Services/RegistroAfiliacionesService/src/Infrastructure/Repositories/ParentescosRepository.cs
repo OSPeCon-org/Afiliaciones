@@ -35,7 +35,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
             return _context.Parentescos.Update(parentesco).Entity;
         }
 
-        public async Task<Parentescos> GetAsync(Guid id)
+        public async Task<Parentescos> GetByIdAsync(Guid id)
         {
             var item = await _context
                                 .Parentescos
@@ -60,11 +60,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
             return clasif;
         }
 
-        public Task<Parentescos> GetByIdAsync(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
-
+       
 
     }
 }
