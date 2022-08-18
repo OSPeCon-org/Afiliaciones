@@ -3,17 +3,17 @@
 version: "3"
 
 services:
-    db:
+    afiliados_db:
         image: mcr.microsoft.com/mssql/server:2017-CU20-ubuntu-16.04
         restart: always
         ports:
-            - "1433:1433"
+            - "1434:1433"
         environment:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=oSpEcONSQL3578951
             - MSSQL_PID=Express
         volumes:
-            - ./data-mssql:/var/opt/mssql/data
+            - ./afiliados_data-mssql:/var/opt/mssql/data
     portainer:
         image: portainer/portainer-ce
         ports:
@@ -24,11 +24,13 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             - ./portainer_data:/data
 
-    api:
+    afiliados_api:
         build:
             context: .
             dockerfile: Dockerfile
         restart: always
+        depends_on:
+            - afiliados_db
         ports:
             - "5000:80"
             - "5001:443"

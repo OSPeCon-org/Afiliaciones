@@ -31,6 +31,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
         public DbSet<DetalleDocumentacion> DetalleDocumentacion { get; set; }
         public DbSet<AfiliadosDomicilios> AfiliadosDomicilios { get; set; }
         public DbSet<AfiliadosDocumentacion> AfiliadosDocumentacion { get; set; }
+        public DbSet<AfiliadosContactos> AfiliadosContactos { get; set; }
         private readonly IMediator _mediator;
         private IDbContextTransaction _currentTransaction;
 
@@ -64,6 +65,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
             modelBuilder.ApplyConfiguration(new DetalleDocumentacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AfiliadosDomiciliosEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AfiliadosDocumentacionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AfiliadosContactosEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -188,14 +190,14 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
             if (env == "Prod")
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AfiliacionesContext>()
-                .UseSqlServer("Server=10.1.10.29;Initial Catalog=Afiliaciones;User ID=sa;password=informacion");
+                .UseSqlServer("Server=afiliados_db;Initial Catalog=Afiliaciones;User ID=sa;password=oSpEcONSQL3578951");
                 return new AfiliacionesContext(optionsBuilder.Options, new NoMediator());
             }
             if (env == "Dev")
             {
 
                 var optionsBuilder = new DbContextOptionsBuilder<AfiliacionesContext>()
-                .UseSqlServer("Server=sqldev01;Initial Catalog=Afiliaciones;integrated security=true");
+                .UseSqlServer("Server=192.168.40.33,1434;Initial Catalog=Afiliaciones;User ID=sa;password=oSpEcONSQL3578951");
                 return new AfiliacionesContext(optionsBuilder.Options, new NoMediator());
             }
 

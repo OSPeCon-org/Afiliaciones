@@ -121,6 +121,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped(typeof(IDetalleDocumentacionRepository), typeof(DetalleDocumentacionRepository));
             services.AddScoped(typeof(IAfiliadosDomiciliosRepository), typeof(AfiliadosDomiciliosRepository));
             services.AddScoped(typeof(IAfiliadosDocumentacionRepository), typeof(AfiliadosDocumentacionRepository));
+            services.AddScoped(typeof(IAfiliadosContactosRepository), typeof(AfiliadosContactosRepository));
 
             services.AddScoped<INacionalidadesQueries>(conns => new NacionalidadesQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEstadosCivilesQueries>(conns => new EstadosCivilesQueries(Configuration.GetConnectionString("DefaultConnection")));
@@ -136,7 +137,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped<IDetalleDocumentacionQueries>(conns => new DetalleDocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAfiliadosDomiciliosQueries>(conns => new AfiliadosDomiciliosQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAfiliadosDocumentacionQueries>(conns => new AfiliadosDocumentacionQueries(Configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddScoped<IAfiliadosContactosQueries>(conns => new AfiliadosContactosQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AfiliacionesContext>(opt =>
                       opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Application")));
 
@@ -165,7 +166,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AfiliacionesContext afiliacionesContext)
         {
 
 
@@ -200,13 +201,17 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+         
             app.UseEndpoints(endpoints =>
                        {
                            endpoints.MapControllers();
                            /* endpoints.Select().Filter().OrderBy().Count().MaxTop(100);
                            endpoints.MapODataRoute("odata", "odata", GetEdmModel()); */
                        });
+
+                       
+            
+          
             ConfigureEventBus(app);
 
         }

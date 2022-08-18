@@ -70,19 +70,19 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            try
-            {
+            //try
+            //{
                 //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
                 //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
                 var afiliados = await _afiliadosQueries.GetAll();
 
                 return Ok(afiliados);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                return NotFound();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+              //  _logger.LogError(ex.Message);
+               // return NotFound();
+           // }
         }
 
         [Route("add")]

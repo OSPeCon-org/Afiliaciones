@@ -105,6 +105,55 @@ namespace Infrastructure.Migrations
                     b.ToTable("Afiliados", "dbo");
                 });
 
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosContactos", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("AfiliadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Celular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaAlta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Laboral")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LegacyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mail2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Particular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioAlta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioUpdate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AfiliadosId");
+
+                    b.ToTable("AfiliadosContactos", "dbo");
+                });
+
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosDocumentacion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -621,6 +670,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Plan");
 
                     b.Navigation("TipoDocumento");
+                });
+
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosContactos", b =>
+                {
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Afiliados", "Afiliado")
+                        .WithMany()
+                        .HasForeignKey("AfiliadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Afiliado");
                 });
 
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosDocumentacion", b =>

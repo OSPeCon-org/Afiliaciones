@@ -84,6 +84,30 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             }
         }
 
+        [Route("add")]
+        [HttpPost]
+        public async Task<IActionResult> addPlanesAsync([FromBody] AddPlanesCommand command)
+        {
+
+            Guid UID = await _mediator.Send(command);
+
+            return Ok(UID);
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [AllowAnonymous]
+        public async Task<IActionResult> updatePlanesAsync([FromBody] UpdatePlanesCommand command)
+        {
+            bool commandResult = false;
+
+            commandResult = await _mediator.Send(command);
+
+            return Ok();
+        }
+
         
 
     }
