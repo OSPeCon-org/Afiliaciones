@@ -67,7 +67,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                     @"SELECT d.*
-                    FROM     dbo.Documentacion d Order by d.Descripcion desc;");
+                    FROM     dbo.Documentacion d Order by d.Descripcion;");
 
                 var documentaciones = multiple.Read<DocumentacionDTO>().ToList();
 

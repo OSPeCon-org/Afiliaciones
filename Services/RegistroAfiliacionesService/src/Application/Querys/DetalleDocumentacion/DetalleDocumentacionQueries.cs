@@ -28,7 +28,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    @"SELECT dd.*, p.Descripcion as PlanNombre, d.Descripcion as DocumentacionNombre, d.Discapacidad, dd.Obligatorio
                     FROM  dbo.DetalleDocumentacion dd inner join 
                     Planes p on dd.PlanId=d.Id 
-                    inner join Documentacion d on dd.DocumentacionId=d.Id
+                    inner join Documentacion d on dd.DocumentacionId=dd.Id
                     where dd.Id = @id;"
                     , new { id });
 
@@ -41,7 +41,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             }
         }
 
-        public async Task<IEnumerable<DetalleDocumentacionDTO>> GetDetalleDocumentacionByPlanParentescoAsync(Guid planId, Guid documentacionId, bool discapacidad)
+        public async Task<IEnumerable<DetalleDocumentacionDTO>> GetDetalleDocumentacionByPlanParentescoAsync(Guid planId, Guid parentescoId, bool discapacidad)
 
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -58,10 +58,11 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 var multiple = await connection.QueryMultipleAsync(
                    @"SELECT dd.*, p.Descripcion as PlanNombre, d.Descripcion as DocumentacionNombre, d.Discapacidad, dd.Obligatorio
                     FROM  dbo.DetalleDocumentacion dd inner join 
-                    Planes p on dd.PlanId=d.Id 
+                    Planes p on dd.PlanId=p.Id 
                     inner join Documentacion d on dd.DocumentacionId=d.Id
-                    where dd.PlanId=planId and dd.DocumentacionId=d.Id" + where
-                    , new { planId, documentacionId });
+                    inner join Parentescos pa on pa.Id=dd.ParentescoId
+                    where dd.PlanId=@planId and  dd.ParentescoId=@parentescoId" + where
+                    , new { planId, parentescoId });
 
                 var detalleDocumentacion = multiple.Read<DetalleDocumentacionDTO>().ToList();
 
@@ -81,7 +82,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 var multiple = await connection.QueryMultipleAsync(
                     @"SELECT dd.*, p.Descripcion as PlanNombre, d.Descripcion as DocumentacionNombre, d.Discapacidad, dd.Obligatorio
                     FROM  dbo.DetalleDocumentacion dd inner join 
-                    Planes p on dd.PlanId=d.Id 
+                    Planes p on dd.PlanId=p.Id 
+                    inner join Parentescos pa on pa.Id=dd.ParentescoId
                     inner join Documentacion d on dd.DocumentacionId=d.Id;");
 
                 var detalleDocumentacion = multiple.Read<DetalleDocumentacionDTO>().ToList();

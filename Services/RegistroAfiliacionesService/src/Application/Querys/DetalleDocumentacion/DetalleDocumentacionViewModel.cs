@@ -21,6 +21,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public string DocumentacionNombre { get; set; }
         public bool Obligatorio { get; set; }
         public bool Discapacidad { get; set; }
+        public Guid ParentescoId { get; set; }
+        
 
     }
 }

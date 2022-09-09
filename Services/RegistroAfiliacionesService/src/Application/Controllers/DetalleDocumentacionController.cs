@@ -49,9 +49,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         }
 
 
-        [Route("getByPlanDocumentacion/{planId, parentescoId, discapacidad}")]
+        [Route("GetDetalleDocumentacionByPlanParentesco")]
         [HttpGet]
-        public async Task<ActionResult> GetDetalleDocumentacionByPlanDocumentacionAsync(Guid planId, Guid parentescoId, bool discapacidad)
+        public async Task<ActionResult> GetDetalleDocumentacionByPlanParentescoAsync(Guid planId, Guid parentescoId, bool discapacidad)
         {
             try
             {

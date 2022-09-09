@@ -15,6 +15,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public int Documento { get; set; }
         public Guid ParentescoId { get; set; }
         public string CUIL { get; set; }
+        //public Guid AfiliadoId { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Fecha { get; set; }
         public Guid PlanId { get; set; }
@@ -29,6 +30,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public EstadosCiviles EstadoCivil { get; set; }        
         public Nacionalidades Nacionalidad { get; set; }
         public EstadosAfiliacion EstadoAfiliacion { get; set; }
+       // public Afiliados Titular { get; set; }
         
         
 
@@ -49,6 +51,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             if (planId == Guid.Empty) throw new System.InvalidOperationException("El Plan no puede estar vacío");
             if (nacionalidadId == Guid.Empty) throw new System.InvalidOperationException("La Nacionalidad no puede estar vacío");
             if (estadosAfiliacionId == Guid.Empty) throw new System.InvalidOperationException("El estadoAfiliacion no puede estar vacío");
+            //if (afiliadoId==Guid.Empty) throw new System.InvalidOperationException("Debe indicar el titular")
 
 
             Apellido = apellido;
@@ -65,6 +68,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             Discapacitado = discapacitado;
             NacionalidadId = nacionalidadId;
             EstadosAfiliacionId = estadosAfiliacionId;
+            
             this.AddDomainEvent(new AfiliadosAgregadoRequested(this));
         }
 

@@ -67,7 +67,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                     @"SELECT c.Id, c.Descripcion, c.ProvinciasId, p.Descripcion as ProvinciaNombre, c.CodigoPostal, c.CodigoSSS
-                    FROM     dbo.Localidades c inner join dbo.Provincias p on c.ProvinciasId=p.Id Order by c.Descripcion desc;");
+                    FROM     dbo.Localidades c inner join dbo.Provincias p on c.ProvinciasId=p.Id Order by c.Descripcion;");
 
                 var localidades = multiple.Read<LocalidadesDTO>().ToList();
 

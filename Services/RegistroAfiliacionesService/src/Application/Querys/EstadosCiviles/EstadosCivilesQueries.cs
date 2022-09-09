@@ -67,7 +67,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                     @"SELECT c.Id, c.Descripcion, c.CodigoSSS
-                    FROM     dbo.EstadosCiviles c Order by c.Descripcion desc;");
+                    FROM     dbo.EstadosCiviles c Order by c.Descripcion;");
 
                 var estadosCiviles = multiple.Read<EstadosCivilesDTO>().ToList();
 
