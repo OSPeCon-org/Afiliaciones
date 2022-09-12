@@ -12,6 +12,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.EntityConfigurations;
 using OSPeConTI.Afiliaciones.Services.CursosService.Domain.SeedWork;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
 {
@@ -178,32 +179,26 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
     public class AfiliacionesContextDesignFactory : IDesignTimeDbContextFactory<AfiliacionesContext>
     {
 
-        public AfiliacionesContext CreateDbContext(string[] args)
+       public AfiliacionesContext CreateDbContext(string[] args)
         {
             string env = args.Length == 0 ? "" : args[0];
+            IConfigurationRoot configuration = null;
 
-            if (env != "Prod" && env != "Dev")
-            {
-                throw new Exception("Indique el entorno (\"Prod\" para produción o \"Dev\" para Desarrollo, ejemplo: dotnet ef database update -s ../application -- \"Prod\")");
-            }
+            if (env != "Prod" && env != "Dev") throw new Exception("Indique el entorno (\"Prod\" para produción o \"Dev\" para Desarrollo, ejemplo: dotnet ef database update -s ../application --context AuthContext -- \"Prod\")");
 
             if (env == "Prod")
             {
-                var optionsBuilder = new DbContextOptionsBuilder<AfiliacionesContext>()
-                .UseSqlServer("Server=afiliados_db;Initial Catalog=Afiliaciones;User ID=sa;password=oSpEcONSQL3578951");
-                return new AfiliacionesContext(optionsBuilder.Options, new NoMediator());
+                configuration = new ConfigurationBuilder().AddJsonFile("appsettings.production.json", false).Build();
             }
             if (env == "Dev")
             {
-
-                var optionsBuilder = new DbContextOptionsBuilder<AfiliacionesContext>()
-                .UseSqlServer("Server=192.168.40.33,1434;Initial Catalog=Afiliaciones;User ID=sa;password=oSpEcONSQL3578951");
-                return new AfiliacionesContext(optionsBuilder.Options, new NoMediator());
+                configuration = new ConfigurationBuilder().AddJsonFile("appsettings.development.json", false).Build();
             }
-
-            return null;
-
+            var optionsBuilder = new DbContextOptionsBuilder<AfiliacionesContext>()
+                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            return new AfiliacionesContext(optionsBuilder.Options, new NoMediator());
         }
+
 
         class NoMediator : IMediator
         {
