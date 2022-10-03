@@ -24,7 +24,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(AddAfiliadosCommand command, CancellationToken cancellationToken)
         {
 
-            Afiliados afiliados = new Afiliados(command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId);
+            Afiliados afiliados = new Afiliados(command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId, command.TitularId);
 
             _afiliadosRepository.Add(afiliados);
 

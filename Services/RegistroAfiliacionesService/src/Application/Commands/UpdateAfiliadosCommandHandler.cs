@@ -42,7 +42,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
             if (afiliadosToUpdate == null) throw new NotFoundException();
 
-            afiliadosToUpdate.Update(command.Id, command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId);
+            afiliadosToUpdate.Update(command.Id, command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId, command.TitularId);
 
             _afiliadosRepository.Update(afiliadosToUpdate);
 

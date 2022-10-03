@@ -75,7 +75,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             {
                 connection.Open();
 
-                var multiple = await connection.QueryMultipleAsync(
+               /*  var multiple = await connection.QueryMultipleAsync(
                 @"Select ad.Id, d.Descripcion as Documentacion, d.id as DetalleDocumentacionId, ad.DocumentacionId, ad.Aprobado, 
 					ad.URL, a.Apellido, a.Nombre, d.Descripcion as Documento 
 					from DetalleDocumentacion dd left join 
@@ -83,7 +83,18 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 					ad on dd.id=ad.DetalleDocumentacionId
 					left join afiliados a on a.id=ad.AfiliadosId
 					left join Documentacion d on dd.DocumentacionId=d.id"
-                    , new { afiliadoId });
+                    , new { afiliadoId }); */
+
+                  var multiple = await connection.QueryMultipleAsync(
+                  @"with Documentos as
+                    (select dd.*, d.Descripcion as documento, a.Id as afiliadoid , a.Nombre, a.Apellido
+                    from DetalleDocumentacion dd inner join Documentacion d on dd.DocumentacionId=d.Id
+                    inner join Afiliados a on a.PlanId=dd.PlanId and a.ParentescoId=dd.ParentescoId
+                    where a.Id=@afiliadoId)
+                    select d.Id, doc.documento as Documentacion, d.id as DetalleDocumentacionId, d.DocumentacionId, d.Aprobado, 
+                                        d.URL, doc.Apellido, doc.Nombre
+                    from Documentos doc left join AfiliadosDocumentacion d on doc.afiliadoid=d.AfiliadosId and doc.Id=d.DetalleDocumentacionId"
+                    , new { afiliadoId });    
 
                 var afiliado = multiple.Read<AfiliadosDocumentacionDTO>().ToList();
 

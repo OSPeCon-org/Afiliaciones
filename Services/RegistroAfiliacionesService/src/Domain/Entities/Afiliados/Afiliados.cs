@@ -15,7 +15,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public int Documento { get; set; }
         public Guid ParentescoId { get; set; }
         public string CUIL { get; set; }
-        //public Guid AfiliadoId { get; set; }
+        public Guid TitularId { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Fecha { get; set; }
         public Guid PlanId { get; set; }
@@ -30,7 +30,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public EstadosCiviles EstadoCivil { get; set; }        
         public Nacionalidades Nacionalidad { get; set; }
         public EstadosAfiliacion EstadoAfiliacion { get; set; }
-       // public Afiliados Titular { get; set; }
+        public Afiliados Titular { get; set; }
         
         
 
@@ -38,7 +38,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         {
 
         }
-        public Afiliados(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId) : this()
+        public Afiliados(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId) : this()
         {
 
 
@@ -68,11 +68,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             Discapacitado = discapacitado;
             NacionalidadId = nacionalidadId;
             EstadosAfiliacionId = estadosAfiliacionId;
+            TitularId=titularId;
+         
             
             this.AddDomainEvent(new AfiliadosAgregadoRequested(this));
         }
 
-        public void Update(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId)
+        public void Update(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
         {
 
             if (string.IsNullOrEmpty(nombre)) throw new System.InvalidOperationException("El nombre no puede estar vacío");
@@ -100,6 +102,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             Discapacitado = discapacitado;
             NacionalidadId = nacionalidadId;
             EstadosAfiliacionId=estadosAfiliacionId;
+            TitularId=titularId;
         }
     }
 }

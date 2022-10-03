@@ -13,8 +13,10 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.EntityConfi
             AfiliadosConfiguration.HasKey(o => o.Id);
 
             AfiliadosConfiguration.Ignore(b => b.DomainEvents);
+            AfiliadosConfiguration.HasOne(o=> o.Titular).WithMany().OnDelete(DeleteBehavior.NoAction). HasForeignKey(k=>k.TitularId);
+            
 
-           // AfiliadosConfiguration.Property(b => b.Costo).HasPrecision(18, 2);
+           
 
         }
     }

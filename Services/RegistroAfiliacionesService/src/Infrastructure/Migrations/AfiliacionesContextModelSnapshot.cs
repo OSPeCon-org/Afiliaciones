@@ -82,6 +82,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("TipoDocumentoId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("TitularId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UsuarioAlta")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,6 +104,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PlanId");
 
                     b.HasIndex("TipoDocumentoId");
+
+                    b.HasIndex("TitularId");
 
                     b.ToTable("Afiliados", "dbo");
                 });
@@ -659,6 +664,12 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Afiliados", "Titular")
+                        .WithMany()
+                        .HasForeignKey("TitularId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("EstadoAfiliacion");
 
                     b.Navigation("EstadoCivil");
@@ -670,6 +681,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Plan");
 
                     b.Navigation("TipoDocumento");
+
+                    b.Navigation("Titular");
                 });
 
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.AfiliadosContactos", b =>

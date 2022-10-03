@@ -37,6 +37,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public Guid NacionalidadId { get; set; }
         [DataMember]
         public Guid EstadosAfiliacionId { get; set; }
+        [DataMember]
+        public Guid TitularId { get; set; }
 
 
 
@@ -45,7 +47,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         {
 
         }
-        public AddAfiliadosCommand(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId)
+        public AddAfiliadosCommand(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
 
         {
             Apellido = apellido;
@@ -62,6 +64,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             NacionalidadId = nacionalidadId;
             Fecha = new DateTime();
             EstadosAfiliacionId = estadosAfiliacionId;
+            TitularId=titularId;
         }
     }
 }
