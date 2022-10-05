@@ -38,7 +38,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         {
 
         }
-        public Afiliados(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId) : this()
+       /*  public Afiliados(string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId) : this()
         {
 
 
@@ -72,9 +72,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
          
             
             this.AddDomainEvent(new AfiliadosAgregadoRequested(this));
-        }
+        } */
 
-        public void Update(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
+        public Afiliados(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
         {
 
             if (string.IsNullOrEmpty(nombre)) throw new System.InvalidOperationException("El nombre no puede estar vacío");

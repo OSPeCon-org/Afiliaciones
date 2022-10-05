@@ -77,36 +77,21 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
                 var afiliados = await _afiliadosQueries.GetAll();
 
                 return Ok(afiliados);
-            //}
-            //catch (Exception ex)
-            //{
-              //  _logger.LogError(ex.Message);
-               // return NotFound();
-           // }
         }
 
-        [Route("add")]
+ 
+        [Route("actualizar")]
         [HttpPost]
-        public async Task<IActionResult> addAfiliadossAsync([FromBody] AddAfiliadosCommand command)
-        {
-
-            Guid UID = await _mediator.Send(command);
-
-            return Ok(UID);
-        }
-
-        [Route("update")]
-        [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [AllowAnonymous]
-        public async Task<IActionResult> updateAfiliadosAsync([FromBody] UpdateAfiliadosCommand command)
+        public async Task<IActionResult> actualizarAfiliadosAsync([FromBody] ActualizarAfiliadosCommand command)
         {
-            bool commandResult = false;
+            Guid commandResult = Guid.Empty;
 
             commandResult = await _mediator.Send(command);
 
-            return Ok();
+            return Ok(commandResult);
         }
 
     }

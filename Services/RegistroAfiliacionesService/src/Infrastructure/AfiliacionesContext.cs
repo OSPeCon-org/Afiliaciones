@@ -99,7 +99,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
                 if (entity is ITrack)
                 {
                     var track = entity as ITrack;
-                    track.Id = Guid.NewGuid();
+                    if (track.Id == Guid.Empty)  track.Id = Guid.NewGuid();
                     track.FechaAlta = DateTime.Now;
                     track.UsuarioAlta = Thread.CurrentPrincipal != null ? Thread.CurrentPrincipal.Identity.Name : "Anonimo";
                     track.Activo = true;
