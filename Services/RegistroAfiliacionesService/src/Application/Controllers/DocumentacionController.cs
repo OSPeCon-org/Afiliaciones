@@ -13,6 +13,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class DocumentacionController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -32,6 +33,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         [Route("{id}")]
         [HttpGet]
+
         public async Task<ActionResult> GetDocumentacionAsync(Guid id)
         {
             try
@@ -69,6 +71,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         [Route("all")]
         [HttpGet]
+        [AllowAnonymousAttribute]
         public async Task<ActionResult> GetAll()
         {
             try

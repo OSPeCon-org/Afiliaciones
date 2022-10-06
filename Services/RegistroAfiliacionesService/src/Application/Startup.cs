@@ -70,13 +70,29 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         {
 
 
+
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddAuthorization();
             services.AddControllers();
             services.AddSwaggerGen(c =>
                {
                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Afiliaciones", Version = "v1" });
+
+                   c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                   {
+                       Name = "Authorization",
+                       Type = SecuritySchemeType.ApiKey,
+                       Scheme = "Bearer",
+                       BearerFormat = "JWT",
+                       In = ParameterLocation.Header,
+                       Description = "JWT Authorization header using the Bearer scheme."
+                   });
+                   c.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                    {new OpenApiSecurityScheme{Reference = new OpenApiReference{
+                        Type = ReferenceType.SecurityScheme,Id = "Bearer"}},new string[] {}}
+                        });
                });
+
             //services.AddOData();
 
 
@@ -85,6 +101,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -106,7 +123,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(INotificationHandler<AfiliadosAgregadoRequested>), typeof(AfiliadosAgregadoHandler));
-            
+
 
             services.AddScoped(typeof(IAfiliadosRepository), typeof(AfiliadosRepository));
             services.AddScoped(typeof(IEstadosCivilesRepository), typeof(EstadosCivilesRepository));
@@ -122,6 +139,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddScoped(typeof(IAfiliadosDomiciliosRepository), typeof(AfiliadosDomiciliosRepository));
             services.AddScoped(typeof(IAfiliadosDocumentacionRepository), typeof(AfiliadosDocumentacionRepository));
             services.AddScoped(typeof(IAfiliadosContactosRepository), typeof(AfiliadosContactosRepository));
+            services.AddScoped(typeof(UsuarioAfiliadosRepository), typeof(UsuarioAfiliadosRepository));
 
             services.AddScoped<INacionalidadesQueries>(conns => new NacionalidadesQueries(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEstadosCivilesQueries>(conns => new EstadosCivilesQueries(Configuration.GetConnectionString("DefaultConnection")));
@@ -201,7 +219,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             app.UseAuthentication();
             app.UseAuthorization();
 
-         
+
             app.UseEndpoints(endpoints =>
                        {
                            endpoints.MapControllers();
@@ -209,9 +227,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
                            endpoints.MapODataRoute("odata", "odata", GetEdmModel()); */
                        });
 
-                       
-            
-          
+
+
+
             ConfigureEventBus(app);
 
         }

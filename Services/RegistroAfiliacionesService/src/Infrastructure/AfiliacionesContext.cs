@@ -13,6 +13,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.EntityConfigura
 using OSPeConTI.Afiliaciones.Services.CursosService.Domain.SeedWork;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Autorizacion;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
 {
@@ -33,6 +34,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
         public DbSet<AfiliadosDomicilios> AfiliadosDomicilios { get; set; }
         public DbSet<AfiliadosDocumentacion> AfiliadosDocumentacion { get; set; }
         public DbSet<AfiliadosContactos> AfiliadosContactos { get; set; }
+        public DbSet<UsuarioAfiliados> UsuarioAfiliados { get; set; }
         private readonly IMediator _mediator;
         private IDbContextTransaction _currentTransaction;
 
@@ -52,7 +54,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+
             modelBuilder.ApplyConfiguration(new AfiliadosEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EstadosCivilesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new NacionalidadesEntityTypeConfiguration());
@@ -67,6 +69,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
             modelBuilder.ApplyConfiguration(new AfiliadosDomiciliosEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AfiliadosDocumentacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AfiliadosContactosEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioAfiliadosEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -99,7 +102,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
                 if (entity is ITrack)
                 {
                     var track = entity as ITrack;
-                    if (track.Id == Guid.Empty)  track.Id = Guid.NewGuid();
+                    if (track.Id == Guid.Empty) track.Id = Guid.NewGuid();
                     track.FechaAlta = DateTime.Now;
                     track.UsuarioAlta = Thread.CurrentPrincipal != null ? Thread.CurrentPrincipal.Identity.Name : "Anonimo";
                     track.Activo = true;
@@ -179,7 +182,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
     public class AfiliacionesContextDesignFactory : IDesignTimeDbContextFactory<AfiliacionesContext>
     {
 
-       public AfiliacionesContext CreateDbContext(string[] args)
+        public AfiliacionesContext CreateDbContext(string[] args)
         {
             string env = args.Length == 0 ? "" : args[0];
             IConfigurationRoot configuration = null;

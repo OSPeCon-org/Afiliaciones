@@ -22,6 +22,26 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Autorizacion.UsuarioAfiliados", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("AfiliadoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsuarioAfiliados", "dbo");
+                });
+
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Afiliados", b =>
                 {
                     b.Property<Guid>("Id")
@@ -85,6 +105,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("TitularId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UsuarioAfiliadosId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UsuarioAlta")
                         .HasColumnType("nvarchar(max)");
 
@@ -106,6 +129,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("TipoDocumentoId");
 
                     b.HasIndex("TitularId");
+
+                    b.HasIndex("UsuarioAfiliadosId");
 
                     b.ToTable("Afiliados", "dbo");
                 });
@@ -670,6 +695,10 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Autorizacion.UsuarioAfiliados", null)
+                        .WithMany("Afiliados")
+                        .HasForeignKey("UsuarioAfiliadosId");
+
                     b.Navigation("EstadoAfiliacion");
 
                     b.Navigation("EstadoCivil");
@@ -760,6 +789,11 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Provincia");
+                });
+
+            modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Autorizacion.UsuarioAfiliados", b =>
+                {
+                    b.Navigation("Afiliados");
                 });
 
             modelBuilder.Entity("OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities.Documentacion", b =>
