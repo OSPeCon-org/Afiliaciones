@@ -103,23 +103,18 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             return Ok(commandResult);
         }
 
-        /*  [Route("grupoFamiliar")]
-           [HttpGet]
-          [ProducesResponseType((int)HttpStatusCode.OK)]
-          [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [Route("grupoFamiliar")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
 
-          public async Task<IActionResult> grupoFamiliar(string titularId){
+        public async Task<IActionResult> grupoFamiliar(Guid titularId)
+        {
 
+            var grupoFamiliar = await _afiliadosQueries.GetGrupoFamiliar(titularId);
+            return Ok(grupoFamiliar);
 
-              var nameId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-              var usuarioId = new Guid(nameId.Value);
-              if titularId == "")
-              IEnumerable<UsuarioAfiliados> titulares = _usuarioAfiliadosRepository.GetByUsuarioIdAsync(usuarioId);
-
-
-
-
-          } */
+        }
 
     }
 }

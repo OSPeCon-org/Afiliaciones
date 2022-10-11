@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositories
 {
@@ -60,5 +61,11 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositorie
             return afiliado;
         }
 
+        public List<Afiliados> GetGrupoFamiliar(Guid titularId)
+        {
+            var grupoFamiliar = _context.Afiliados.Where(a => a.TitularId == titularId).ToList();
+            return grupoFamiliar;
+
+        }
     }
 }

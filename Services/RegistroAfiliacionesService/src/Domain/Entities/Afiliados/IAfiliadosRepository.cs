@@ -12,5 +12,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         Afiliados Update(Afiliados afiliados);
         Task<Afiliados> GetAsync(Guid Id);
         Task<Afiliados> GetByDocumentoAsync(int documento);
+        List<Afiliados> GetGrupoFamiliar(Guid titularId);
     }
 }
