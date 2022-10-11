@@ -281,3 +281,5 @@ pub/
 # Ignores all extra inf.yaml and app.yaml that are copied by prepare-devspaces.ps1
 src/**/app.yaml
 src/**/inf.yaml
+
+afiliados_data-mssql
