@@ -13,6 +13,7 @@ using System.Data.Common;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositories;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
@@ -24,42 +25,48 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         private readonly AfiliacionesContext _AfiliacionesContext;
 
         private readonly IAfiliacionIntegrationEventService _afiliacionIntegrationEventService;
+        private readonly AfiliadoCreadoIntegrationEventHandler _afiliadoCreadoIntegrationEventHandler;
 
-        public ActualizarAfiliadosCommandHandler(IAfiliadosRepository afiliadosRepository, AfiliacionesContext AfiliacionesContext, IAfiliacionIntegrationEventService afiliacionIntegrationEventService)
+        public ActualizarAfiliadosCommandHandler(IAfiliadosRepository afiliadosRepository, AfiliacionesContext AfiliacionesContext, IAfiliacionIntegrationEventService afiliacionIntegrationEventService, AfiliadoCreadoIntegrationEventHandler afiliadoCreadoIntegrationEventHandler)
         {
             _afiliadosRepository = afiliadosRepository;
-
             _AfiliacionesContext = AfiliacionesContext;
-
             _afiliacionIntegrationEventService = afiliacionIntegrationEventService;
-
+            _afiliadoCreadoIntegrationEventHandler = afiliadoCreadoIntegrationEventHandler;
         }
 
         public async Task<Guid> Handle(ActualizarAfiliadosCommand command, CancellationToken cancellationToken)
         {
 
             var afiliado = new Afiliados(command.Id, command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId, command.TitularId);
-
-            if (afiliado.Id == Guid.Empty){
+            //Si es un afiliado nuevo
+            var esNuevoTitular = false;
+            if (afiliado.Id == Guid.Empty)
+            {
                 afiliado.Id = Guid.NewGuid();
-                if (afiliado.TitularId==Guid.Empty) afiliado.TitularId=afiliado.Id;
+                //si es el alta de un titular
+                if (afiliado.TitularId == Guid.Empty)
+                {
+                    afiliado.TitularId = afiliado.Id;
+                    esNuevoTitular = true;
+
+
+                }
                 _afiliadosRepository.Add(afiliado);
-            }else{
-                /* var afiliadosToActualizar = await _afiliadosRepository.GetAsync(command.Id);
-                if (afiliadosToActualizar == null) throw new NotFoundException(); */
-                
+            }
+            else
+            {
                 _afiliadosRepository.Update(afiliado);
             }
 
             await _afiliadosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-            AfiliadoModificadoIntegrationEvent evento = new AfiliadoModificadoIntegrationEvent(command.Id);
+            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(afiliado.Id, command.UsuaroId, esNuevoTitular);
 
-
-            //Guid transactionId = Guid.NewGuid();
-           // await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
-            //await _afiliacionIntegrationEventService.PublishEventsThroughEventBusAsync(transactionId);
-
+            Guid transactionId = Guid.NewGuid();
+            await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
+            await _afiliacionIntegrationEventService.PublishEventsThroughEventBusAsync(transactionId);
+            await _afiliadoCreadoIntegrationEventHandler.Handle(evento);
 
             return afiliado.Id;
         }

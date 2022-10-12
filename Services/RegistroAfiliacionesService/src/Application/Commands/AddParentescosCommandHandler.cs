@@ -29,8 +29,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             _parentescosRepository.Add(parentescos);
 
             await _parentescosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(parentescos.Id);
-            _eventBus.Publish(evento);
             return parentescos.Id;
         }
     }

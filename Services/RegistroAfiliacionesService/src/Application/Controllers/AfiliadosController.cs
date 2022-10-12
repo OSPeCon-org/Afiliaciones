@@ -97,6 +97,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         public async Task<IActionResult> actualizarAfiliadosAsync([FromBody] ActualizarAfiliadosCommand command)
         {
             Guid commandResult = Guid.Empty;
+            var nameId = this.User.Identities.First().Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            command.UsuaroId = new Guid(nameId.Value);
 
             commandResult = await _mediator.Send(command);
 

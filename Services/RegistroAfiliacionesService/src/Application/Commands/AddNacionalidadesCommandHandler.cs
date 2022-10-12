@@ -29,8 +29,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             _nacionalidadesRepository.Add(nacionalidades);
 
             await _nacionalidadesRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(nacionalidades.Id);
-            _eventBus.Publish(evento);
             return nacionalidades.Id;
         }
     }

@@ -282,4 +282,4 @@ pub/
 src/**/app.yaml
 src/**/inf.yaml
 
-afiliados_data-mssql
+afiliados_data-mssql/

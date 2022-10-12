@@ -28,9 +28,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
             _afiliadosContactosContactosRepository.Add(afiliadosContactosContactos);
 
-            await _afiliadosContactosContactosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(afiliadosContactosContactos.Id);
-            _eventBus.Publish(evento);
             return afiliadosContactosContactos.Id;
         }
     }

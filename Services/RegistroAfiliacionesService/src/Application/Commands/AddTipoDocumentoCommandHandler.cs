@@ -29,8 +29,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             _tipoDocumentoRepository.Add(tipoDocumento);
 
             await _tipoDocumentoRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(tipoDocumento.Id);
-            _eventBus.Publish(evento);
             return tipoDocumento.Id;
         }
     }

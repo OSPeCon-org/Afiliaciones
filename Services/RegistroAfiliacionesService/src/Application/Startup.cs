@@ -174,8 +174,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             services.AddHttpClient();
             services.AddOdataSwaggerSupport();
-            services.AddTransient<AfiliadoModificadoIntegrationEventHandler>();
-            services.AddTransient<IAfiliacionIntegrationEventService, AfiliacionIntegrationEventService>();
+            services.AddTransient<AfiliadoCreadoIntegrationEventHandler>();
             services.AddEventBus(Configuration);
 
             //services.AddOptions();
@@ -238,8 +237,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-            eventBus.Subscribe<AfiliadoModificadoIntegrationEvent, AfiliadoModificadoIntegrationEventHandler>();
-            //eventBus.Subscribe<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>();
+            /*             eventBus.Subscribe<AfiliadoModificadoIntegrationEvent, AfiliadoModificadoIntegrationEventHandler>();
+                        eventBus.Subscribe<AfiliadoCreadoIntegrationEvent, AfiliadoCreadoIntegrationEventHandler>();
+             */
         }
         private IEdmModel GetEdmModel()
         {
@@ -255,7 +255,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
+            //services.AddTransient<IIntegrationEventHandler<AfiliadoCreadoIntegrationEvent>, AfiliadoCreadoIntegrationEventHandler>();
 
+            services.AddTransient<IAfiliacionIntegrationEventService, AfiliacionIntegrationEventService>();
             services.AddTransient<Func<DbConnection, IIntegrationEventLogService>>(
                        sp => (DbConnection c) => new IntegrationEventLogService(c));
 

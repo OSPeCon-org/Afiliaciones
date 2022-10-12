@@ -29,8 +29,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             _planesRepository.Add(planes);
 
             await _planesRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(planes.Id);
-            _eventBus.Publish(evento);
             return planes.Id;
         }
     }

@@ -24,13 +24,11 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(AddDetalleDocumentacionCommand command, CancellationToken cancellationToken)
         {
 
-            DetalleDocumentacion detalleDocumentacion = new DetalleDocumentacion(command.PlanId, command.ParentescoId, command.DocumentacionId, command.Obligatorio );
+            DetalleDocumentacion detalleDocumentacion = new DetalleDocumentacion(command.PlanId, command.ParentescoId, command.DocumentacionId, command.Obligatorio);
 
             _detalleDocumentacionRepository.Add(detalleDocumentacion);
 
             await _detalleDocumentacionRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(detalleDocumentacion.Id);
-            _eventBus.Publish(evento);
             return detalleDocumentacion.Id;
         }
     }

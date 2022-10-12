@@ -29,8 +29,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             _documentacionRepository.Add(documentacion);
 
             await _documentacionRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(documentacion.Id);
-            _eventBus.Publish(evento);
             return documentacion.Id;
         }
     }

@@ -8,11 +8,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.IntegrationEve
     {
         [JsonInclude]
         public Guid AfiliadoId { get; set; }
+        public Guid UsuarioId { get; set; }
+        public bool EsNuevoTitular { get; set; }
 
         [JsonConstructor]
-        public AfiliadoCreadoIntegrationEvent(Guid afiliadoId)
+        public AfiliadoCreadoIntegrationEvent(Guid afiliadoId, Guid usuarioId, bool esNuevoTitular)
         {
             AfiliadoId = afiliadoId;
+            UsuarioId = usuarioId;
+            EsNuevoTitular = esNuevoTitular;
 
         }
     }
