@@ -135,6 +135,38 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         }
 
 
+        public async Task<AfiliadosDTO> GetAfiliadosByCuilAsync(string cuil)
+
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var multiple = await connection.QueryMultipleAsync(
+                   @"SELECT top 200 a.Id, a.Apellido, a.Nombre, a.TipoDocumentoId, d.Descripcion as TipoDocumentoNombre, 
+                   a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
+                   a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
+                   a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
+                   ea.Descripcion as EstadosAfiliacionNombre
+                    FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
+                    inner join Parentescos p on a.ParentescoId=p.Id
+                    inner join Planes pl on a.PlanId=pl.Id
+                    inner join EstadosCiviles e on a.EstadoCivilId=e.Id
+                    inner join Nacionalidades n on a.NacionalidadId=n.Id 
+                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
+                    where a.Cuil = @cuil Order by a.FechaAlta desc;"
+                    , new { cuil });
+
+                var afiliado = multiple.Read<AfiliadosDTO>().First();
+
+                if (afiliado == null)
+                    throw new KeyNotFoundException();
+
+                return afiliado;
+            }
+        }
+
+
     }
 
 }

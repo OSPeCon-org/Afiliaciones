@@ -12,6 +12,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         Task<IEnumerable<AfiliadosDTO>> GetAll();
         Task<IEnumerable<AfiliadosDTO>> GetGrupoFamiliar(Guid titularId);
 
+        Task<AfiliadosDTO> GetAfiliadosByCuilAsync(string cuil);
+
 
     }
 }

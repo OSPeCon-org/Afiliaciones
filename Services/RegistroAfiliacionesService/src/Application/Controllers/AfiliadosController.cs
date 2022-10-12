@@ -119,5 +119,24 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         }
 
+
+        [Route("getByCuil/{cuil}")]
+        [HttpGet]
+        public async Task<ActionResult> GetAfiliadosByCuilAsync(string cuil)
+        {
+            try
+            {
+                //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
+                //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
+                var afiliado = await _afiliadosQueries.GetAfiliadosByCuilAsync(cuil);
+
+                return Ok(afiliado);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
     }
 }
