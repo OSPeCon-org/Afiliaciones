@@ -141,15 +141,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
         [HttpPost]
         [Route("Accept")]
-        public async Task<ActionResult> Accept(Guid id)
+        public async Task<ActionResult> Accept([FromBody] AcceptUsuarioAfiliadoCommand command)
         {
             var nameId = this.User.Identities.First().Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
             if (nameId.Value == null) throw new ForbiddenException();
 
-            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(id, new Guid(nameId.Value), true);
+            command.UsuarioId = new Guid(nameId.Value);
 
-            await _afiliadoCreadoIntegrationEventHandler.Handle(evento);
+            await _mediator.Send(command);
 
             return Ok();
         }
