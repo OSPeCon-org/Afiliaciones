@@ -18,6 +18,8 @@ using System.Linq;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositories;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Autorizacion;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Exceptions;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.IntegrationEvents;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 {
@@ -30,6 +32,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         private readonly IConfiguration _configuration;
         private readonly UsuarioAfiliadosRepository _usuarioAfiliadosRepository;
         private readonly IAfiliadosRepository _afiliadosRepository;
+        private readonly AfiliadoCreadoIntegrationEventHandler _afiliadoCreadoIntegrationEventHandler;
 
 
         public AutorizacionController(
@@ -37,13 +40,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             ILogger<LocalidadesController> logger,
             IConfiguration configuration,
             UsuarioAfiliadosRepository usuarioAfiliadosRepository,
-            IAfiliadosRepository afiliadosRepository)
+            IAfiliadosRepository afiliadosRepository,
+            AfiliadoCreadoIntegrationEventHandler afiliadoCreadoIntegrationEventHandler)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _configuration = configuration;
             _usuarioAfiliadosRepository = usuarioAfiliadosRepository;
             _afiliadosRepository = afiliadosRepository;
+            _afiliadoCreadoIntegrationEventHandler = afiliadoCreadoIntegrationEventHandler;
         }
 
 
@@ -134,21 +139,19 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             }
         }
 
-        /*  [HttpGet]
-         public System.Collections.Generic.IEnumerable<UsuarioAfiliados> GetAfiliados()
-         {
+        [HttpPost]
+        [Route("Accept")]
+        public async Task<ActionResult> Accept(Guid id)
+        {
+            var nameId = this.User.Identities.First().Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
-             var nameId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-             var usuarioId = new Guid(nameId.Value);
-             return _usuarioAfiliadosRepository.GetByUsuarioIdAsync(usuarioId);
-         }
-  */
+            if (nameId.Value == null) throw new ForbiddenException();
 
+            AfiliadoCreadoIntegrationEvent evento = new AfiliadoCreadoIntegrationEvent(id, new Guid(nameId.Value), true);
 
+            await _afiliadoCreadoIntegrationEventHandler.Handle(evento);
 
-
-
-
-
+            return Ok();
+        }
     }
 }
