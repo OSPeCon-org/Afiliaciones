@@ -12,24 +12,24 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
     // Regular CommandHandler
     public class AddEstadosAfiliacionCommandHandler : IRequestHandler<AddEstadosAfiliacionCommand, Guid>
     {
-        private readonly IEstadosAfiliacionRepository _planesRepository;
+        private readonly IEstadosAfiliacionRepository _estadosAfiliacionRepository;
         private readonly IEventBus _eventBus;
 
-        public AddEstadosAfiliacionCommandHandler(IEstadosAfiliacionRepository planesRepository, IEventBus eventBus)
+        public AddEstadosAfiliacionCommandHandler(IEstadosAfiliacionRepository estadosAfiliacionRepository, IEventBus eventBus)
         {
-            _planesRepository = planesRepository;
+            _estadosAfiliacionRepository = estadosAfiliacionRepository;
             _eventBus = eventBus;
         }
 
         public async Task<Guid> Handle(AddEstadosAfiliacionCommand command, CancellationToken cancellationToken)
         {
 
-            EstadosAfiliacion planes = new EstadosAfiliacion(command.Descripcion);
+            EstadosAfiliacion estadosAfiliacion = new EstadosAfiliacion(command.Descripcion);
 
-            _planesRepository.Add(planes);
+            _estadosAfiliacionRepository.Add(estadosAfiliacion);
 
-            await _planesRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            return planes.Id;
+            await _estadosAfiliacionRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            return estadosAfiliacion.Id;
         }
     }
 }
