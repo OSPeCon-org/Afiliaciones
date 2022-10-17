@@ -12,23 +12,23 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
     // Regular CommandHandler
     public class AddAfiliadosContactosCommandHandler : IRequestHandler<AddAfiliadosContactosCommand, Guid>
     {
-        private readonly IAfiliadosContactosRepository _afiliadosContactosContactosRepository;
+        private readonly IAfiliadosContactosRepository _afiliadosContactosRepository;
         private readonly IEventBus _eventBus;
 
-        public AddAfiliadosContactosCommandHandler(IAfiliadosContactosRepository afiliadosContactosContactosRepository, IEventBus eventBus)
+        public AddAfiliadosContactosCommandHandler(IAfiliadosContactosRepository afiliadosContactosRepository, IEventBus eventBus)
         {
-            _afiliadosContactosContactosRepository = afiliadosContactosContactosRepository;
+            _afiliadosContactosRepository = afiliadosContactosRepository;
             _eventBus = eventBus;
         }
 
         public async Task<Guid> Handle(AddAfiliadosContactosCommand command, CancellationToken cancellationToken)
         {
 
-            AfiliadosContactos afiliadosContactosContactos = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2);
+            AfiliadosContactos afiliadosContactos = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2);
 
-            _afiliadosContactosContactosRepository.Add(afiliadosContactosContactos);
-
-            return afiliadosContactosContactos.Id;
+            _afiliadosContactosRepository.Add(afiliadosContactos);
+            await _afiliadosContactosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            return afiliadosContactos.Id;
         }
     }
 }

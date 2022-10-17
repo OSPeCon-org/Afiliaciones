@@ -67,11 +67,11 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             }
         }
 
-        
+
 
         [Route("add")]
         [HttpPost]
-        public async Task<IActionResult> addAfiliadosContactossAsync([FromBody] AddAfiliadosContactosCommand command)
+        public async Task<IActionResult> addAfiliadosContactosAsync([FromBody] AddAfiliadosContactosCommand command)
         {
 
             Guid UID = await _mediator.Send(command);
