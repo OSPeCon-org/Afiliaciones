@@ -43,32 +43,39 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
+        private IConfigurationBuilder _confBuilder;
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+
 
             _env = env;
 
-            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddEnvironmentVariables(); ;
-            if (_env.IsProduction())
-            {
-                Console.WriteLine("--> Corriendo en Produccion");
-                builder.AddJsonFile("appSettings.production.json", optional: false, reloadOnChange: true);
-            }
-            else
-            {
-                Console.WriteLine("--> Corriendo en Desarrollo");
-                builder.AddJsonFile("appSettings.development.json", optional: false, reloadOnChange: true);
-            }
-            this.Configuration = builder.Build();
+
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
+            _confBuilder = new ConfigurationBuilder().SetBasePath(_env.ContentRootPath).AddEnvironmentVariables();
+
+            if (_env.IsProduction())
+            {
+                Console.WriteLine("--> Corriendo en Produccion");
+                _confBuilder.AddJsonFile("appSettings.production.json", optional: false, reloadOnChange: true);
+            }
+            else
+            {
+                Console.WriteLine("--> Corriendo en Desarrollo");
+                _confBuilder.AddJsonFile("appSettings.development.json", optional: false, reloadOnChange: true);
+            }
+            Configuration = _confBuilder.Build();
+
+            var appSettings = Configuration.GetSection("AppSettings").Get<AppSettings>();
+            services.AddSingleton<AppSettings>(appSettings);
+            services.AddSingleton<IConfiguration>(Configuration);
 
 
             services.AddControllersWithViews().AddNewtonsoftJson();
@@ -99,7 +106,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-            var appSettings = appSettingsSection.Get<AppSettings>();
+            //var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>
