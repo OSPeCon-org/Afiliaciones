@@ -34,7 +34,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public string Nombre { get; set; }
         public string Localidad { get; set; }
         public string Provincia { get; set; }
-        public int ProvinciaId { get; set; }
+        public Guid ProvinciaId { get; set; }
 
 
 
