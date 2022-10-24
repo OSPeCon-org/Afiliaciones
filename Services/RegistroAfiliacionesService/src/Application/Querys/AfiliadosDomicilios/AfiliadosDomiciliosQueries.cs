@@ -26,7 +26,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                    @"SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.Calle, ad.Altura, ad.Piso, ad.Departamento, ad.LocalidadesId, ad.CodigoPostal, 
-                   l.Descripcion as Localidad, p.Descripcion as Provincia
+                   l.Descripcion as Localidad, p.Descripcion as Provincia, p.Id as ProvinciaId
                     FROM     dbo.AfiliadosDomicilios ad inner join Afiliados a on ad.AfiliadosId=a.Id 
                     inner join dbo.Localidades l on ad.LocalidadesId = l.Id
                     inner join dbo.Provincias p on l.ProvinciasId=p.Id
@@ -51,7 +51,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 var multiple = await connection.QueryMultipleAsync(
                 @"SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.Calle, ad.Altura, ad.Piso, ad.Departamento, ad.LocalidadesId, ad.CodigoPostal, 
-                   l.Descripcion as Localidad, p.Descripcion as Provincia
+                   l.Descripcion as Localidad, p.Descripcion as Provincia, p.Id as ProvinciaId
                     FROM     dbo.AfiliadosDomicilios ad inner join Afiliados a on ad.AfiliadosId=a.Id 
                     inner join dbo.Localidades l on ad.LocalidadesId = l.Id
                     inner join dbo.Provincias p on l.ProvinciasId=p.Id
@@ -67,7 +67,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             }
         }
 
-       
+
 
 
     }
