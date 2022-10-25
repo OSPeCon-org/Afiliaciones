@@ -2,10 +2,10 @@ using MediatR;
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
 {
 
-    public class AfiliadosAgregadoRequested : INotification
+    public class AfiliadosActualizadoRequested : INotification
     {
         public Afiliados Afiliado { get; set; }
-        public AfiliadosAgregadoRequested(Afiliados afiliado)
+        public AfiliadosActualizadoRequested(Afiliados afiliado)
         {
             Afiliado = afiliado;
         }

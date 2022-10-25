@@ -129,7 +129,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(INotificationHandler<AfiliadosAgregadoRequested>), typeof(AfiliadosAgregadoHandler));
+            services.AddTransient(typeof(INotificationHandler<AfiliadosActualizadoRequested>), typeof(AfiliadosActualizadoHandler));
 
 
             services.AddScoped(typeof(IAfiliadosRepository), typeof(AfiliadosRepository));
