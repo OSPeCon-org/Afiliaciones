@@ -12,22 +12,23 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             Nombre = "";
             Apellido = "";
             TipoDocumentoId = Guid.Empty;
-            TipoDocumentoNombre="";
-            Documento=0;
-            ParentescoId=Guid.Empty;
-            CUIL="";
-            FechaNacimiento=null;
-            Fecha=null;
-            PlanId=Guid.Empty;
-            PlanNombre="";
-            Sexo="";
-            EstadoCivilId=Guid.Empty;
-            EstadoCivilNombre="";
-            Discapacitado=false;
-            NacionalidadId=Guid.Empty;
-            NacionalidadNombre="";
-            EstadosAfiliacionId=Guid.Empty;
-            EstadosAfiliacionNombre="";
+            TipoDocumentoNombre = "";
+            Documento = 0;
+            ParentescoId = Guid.Empty;
+            CUIL = "";
+            FechaNacimiento = null;
+            Fecha = null;
+            PlanId = Guid.Empty;
+            PlanNombre = "";
+            Sexo = "";
+            EstadoCivilId = Guid.Empty;
+            EstadoCivilNombre = "";
+            Discapacitado = false;
+            NacionalidadId = Guid.Empty;
+            NacionalidadNombre = "";
+            EstadosAfiliacionId = Guid.Empty;
+            EstadosAfiliacionNombre = "";
+            TitularId = Guid.Empty;
         }
         public Guid Id { get; set; }
         public string Apellido { get; set; }
@@ -50,6 +51,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public string NacionalidadNombre { get; set; }
         public Guid EstadosAfiliacionId { get; set; }
         public string EstadosAfiliacionNombre { get; set; }
+        public Guid TitularId { get; set; }
 
 
     }

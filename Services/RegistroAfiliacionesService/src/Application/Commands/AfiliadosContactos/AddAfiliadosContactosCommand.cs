@@ -3,14 +3,15 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
 using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
     [DataContract]
     public class AddAfiliadosContactosCommand : IRequest<Guid>
     {
-         [DataMember]
-         public  Guid AfiliadosId { get; set; }
+        [DataMember]
+        public Guid AfiliadosId { get; set; }
         [DataMember]
         public string Celular { get; set; }
         [DataMember]
@@ -18,9 +19,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         [DataMember]
         public string Laboral { get; set; }
         [DataMember]
-        public string Mail { get; set; }
+        public Email Mail { get; set; }
         [DataMember]
-        public string Mail2 { get; set; }
+        public Email Mail2 { get; set; }
 
 
 
@@ -28,15 +29,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         {
 
         }
-        public AddAfiliadosContactosCommand(Guid afiliadoId, Guid afiliadosId, string celular, string particular, string laboral, string mail, string mail2)
+        public AddAfiliadosContactosCommand(Guid afiliadoId, Guid afiliadosId, string celular, string particular, string laboral, Email mail, Email mail2)
 
         {
             AfiliadosId = afiliadosId;
             Celular = celular;
-            Particular=particular;
-            Laboral=laboral;
-            Mail=mail;
-            Mail2=mail2;
+            Particular = particular;
+            Laboral = laboral;
+            Mail = mail;
+            Mail2 = mail2;
 
         }
     }

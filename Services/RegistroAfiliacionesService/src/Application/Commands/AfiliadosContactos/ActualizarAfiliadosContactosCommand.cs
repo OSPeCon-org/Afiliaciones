@@ -8,7 +8,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
     [DataContract]
-    public class UpdateAfiliadosContactosCommand : IRequest<bool>
+    public class ActualizarAfiliadosContactosCommand : IRequest<Guid>
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -27,12 +27,12 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public Email Mail2 { get; set; }
 
 
-        public UpdateAfiliadosContactosCommand()
+        public ActualizarAfiliadosContactosCommand()
         {
 
         }
 
-        public UpdateAfiliadosContactosCommand(Guid id, Guid afiliadosId, string celular, string particular, string laboral, Email mail, Email mail2)
+        public ActualizarAfiliadosContactosCommand(Guid id, Guid afiliadosId, string celular, string particular, string laboral, Email mail, Email mail2)
 
         {
             Id = Id;

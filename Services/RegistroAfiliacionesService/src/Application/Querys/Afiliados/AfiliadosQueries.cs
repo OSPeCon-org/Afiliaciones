@@ -29,7 +29,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre
+                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
@@ -60,7 +60,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre
+                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
@@ -90,7 +90,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre
+                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
@@ -117,7 +117,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre
+                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
@@ -147,7 +147,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre
+                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id

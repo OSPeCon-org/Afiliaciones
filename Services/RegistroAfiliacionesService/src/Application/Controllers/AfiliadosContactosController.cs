@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Security.Claims;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 {
@@ -92,6 +94,24 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             return Ok();
         }
+        [Route("actualizar")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [AllowAnonymous]
+        public async Task<IActionResult> actualizarAfiliadosContactosAsync([FromBody] ActualizarAfiliadosContactosCommand command)
+        {
+            Guid commandResult = Guid.Empty;
+            var nameId = this.User.Identities.First().Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            //command.UsuarioId = new Guid(nameId.Value);
+
+            commandResult = await _mediator.Send(command);
+
+            return Ok(commandResult);
+        }
+
+
 
     }
 }
