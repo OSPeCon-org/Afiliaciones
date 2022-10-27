@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork
 {
@@ -30,17 +30,17 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork
             }
 
             var parameterType = ConstructorArgumentTypes.GetOrAdd(
-                objectType,
-                t =>
-                    {
-                        var constructorInfo = objectType.GetTypeInfo().GetConstructors(BindingFlags.Public | BindingFlags.Instance).Single();
-                        var parameterInfo = constructorInfo.GetParameters().Single();
-                        return parameterInfo.ParameterType;
-                    });
+               objectType,
+               t =>
+                   {
+                       var constructorInfo = objectType.GetTypeInfo().GetConstructors(BindingFlags.Public | BindingFlags.Instance).Single();
+                       var parameterInfo = constructorInfo.GetParameters().Single();
+                       return parameterInfo.ParameterType;
+                   });
 
-            var value = serializer.Deserialize(reader, parameterType);
+            Cuit ob = (Cuit)Activator.CreateInstance(objectType, (string)"123456789");
 
-            return Activator.CreateInstance(objectType, value);
+            return Activator.CreateInstance(objectType, serializer.Deserialize(reader, parameterType));
         }
 
         public override bool CanConvert(Type objectType)

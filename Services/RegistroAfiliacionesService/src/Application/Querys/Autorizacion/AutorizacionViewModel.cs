@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 {
@@ -14,7 +15,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
     public class TitularDTO
     {
-        public string Apellido { get; set; }
+        public NombrePropio Apellido { get; set; }
         public string Nombre { get; set; }
         public Guid TitularId { get; set; }
     }

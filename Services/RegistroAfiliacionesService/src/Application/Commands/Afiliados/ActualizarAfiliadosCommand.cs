@@ -3,6 +3,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
 using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
@@ -21,8 +22,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public int Documento { get; set; }
         [DataMember]
         public Guid ParentescoId { get; set; }
-        [DataMember]
-        public string CUIL { get; set; }
+
         [DataMember]
         public DateTime FechaNacimiento { get; set; }
         [DataMember]
@@ -42,6 +42,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         [DataMember]
         public Guid TitularId { get; set; }
         public Guid UsuaroId { get; set; }
+        [DataMember]
+        public Cuit CUIL { get; set; }
 
 
         public ActualizarAfiliadosCommand()
@@ -49,24 +51,24 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
         }
 
-        public ActualizarAfiliadosCommand(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, string cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
-        {
-            Id = id;
-            Apellido = apellido;
-            Nombre = nombre;
-            TipoDocumentoId = tipoDocumentoId;
-            Documento = documento;
-            ParentescoId = parentescoId;
-            CUIL = cuil;
-            FechaNacimiento = fechaNacimiento;
-            PlanId = planId;
-            Sexo = sexo;
-            EstadoCivilId = estadoCivilId;
-            Discapacitado = discapacitado;
-            NacionalidadId = nacionalidadId;
-            Fecha = new DateTime();
-            EstadosAfiliacionId = estadosAfiliacionId;
-            TitularId = titularId;
-        }
+        /*   public ActualizarAfiliadosCommand(Guid id, string apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, Cuit cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
+          {
+              Id = id;
+              Apellido = apellido;
+              Nombre = nombre;
+              TipoDocumentoId = tipoDocumentoId;
+              Documento = documento;
+              ParentescoId = parentescoId;
+              CUIL = cuil;
+              FechaNacimiento = fechaNacimiento;
+              PlanId = planId;
+              Sexo = sexo;
+              EstadoCivilId = estadoCivilId;
+              Discapacitado = discapacitado;
+              NacionalidadId = nacionalidadId;
+              Fecha = new DateTime();
+              EstadosAfiliacionId = estadosAfiliacionId;
+              TitularId = titularId;
+          } */
     }
 }

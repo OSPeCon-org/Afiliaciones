@@ -14,6 +14,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure.Repositories;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
@@ -38,7 +39,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(ActualizarAfiliadosCommand command, CancellationToken cancellationToken)
         {
 
-            var afiliado = new Afiliados(command.Id, command.Apellido, command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId, command.TitularId);
+            var afiliado = new Afiliados(command.Id, new NombrePropio(command.Apellido), command.Nombre, command.TipoDocumentoId, command.Documento, command.ParentescoId, command.CUIL, command.FechaNacimiento, command.PlanId, command.Sexo, command.EstadoCivilId, command.Discapacitado, command.NacionalidadId, command.EstadosAfiliacionId, command.TitularId);
             //Si es un afiliado nuevo
             var esNuevoTitular = false;
             if (afiliado.Id == Guid.Empty)

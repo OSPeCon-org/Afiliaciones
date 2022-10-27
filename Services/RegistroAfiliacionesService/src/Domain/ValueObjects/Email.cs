@@ -2,8 +2,6 @@ using System;
 using Newtonsoft.Json;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Exceptions;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork;
-
-
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects
 {
     [JsonConverter(typeof(SingleValueObjectConverter))]

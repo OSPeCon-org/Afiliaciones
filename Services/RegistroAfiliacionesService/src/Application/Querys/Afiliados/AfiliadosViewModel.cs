@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 {
@@ -10,7 +11,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000000");
             Nombre = "";
-            Apellido = "";
+            Apellido = null;
             TipoDocumentoId = Guid.Empty;
             TipoDocumentoNombre = "";
             Documento = 0;
@@ -31,7 +32,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             TitularId = Guid.Empty;
         }
         public Guid Id { get; set; }
-        public string Apellido { get; set; }
+        public NombrePropio Apellido { get; set; }
         public string Nombre { get; set; }
         public Guid TipoDocumentoId { get; set; }
         public string TipoDocumentoNombre { get; set; }
