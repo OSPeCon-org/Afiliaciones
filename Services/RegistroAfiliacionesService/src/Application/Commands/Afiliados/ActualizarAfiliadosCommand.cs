@@ -13,7 +13,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         [DataMember]
         public Guid Id { get; set; }
         [DataMember]
-        public string Apellido { get; set; }
+        public NombrePropio Apellido { get; set; }
         [DataMember]
         public string Nombre { get; set; }
         [DataMember]

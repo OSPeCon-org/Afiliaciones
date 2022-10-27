@@ -38,8 +38,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork
                        return parameterInfo.ParameterType;
                    });
 
-            Cuit ob = (Cuit)Activator.CreateInstance(objectType, (string)"123456789");
-
             return Activator.CreateInstance(objectType, serializer.Deserialize(reader, parameterType));
         }
 
