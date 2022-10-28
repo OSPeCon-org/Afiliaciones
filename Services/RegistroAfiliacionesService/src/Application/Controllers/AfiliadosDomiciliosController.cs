@@ -71,29 +71,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
 
 
-        [Route("add")]
-        [HttpPost]
-        public async Task<IActionResult> addAfiliadosDomiciliossAsync([FromBody] AddAfiliadosDomiciliosCommand command)
-        {
-
-            Guid UID = await _mediator.Send(command);
-
-            return Ok(UID);
-        }
-
-        [Route("update")]
-        [HttpPut]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [AllowAnonymous]
-        public async Task<IActionResult> updateAfiliadosDomiciliosAsync([FromBody] UpdateAfiliadosDomiciliosCommand command)
-        {
-            bool commandResult = false;
-
-            commandResult = await _mediator.Send(command);
-
-            return Ok();
-        }
 
 
         [Route("actualizar")]

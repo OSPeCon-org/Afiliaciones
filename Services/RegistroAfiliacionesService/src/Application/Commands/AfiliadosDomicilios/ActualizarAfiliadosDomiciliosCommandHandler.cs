@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries;
 using System.Collections.Generic;
 using System.Linq;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
@@ -43,7 +44,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(ActualizarAfiliadosDomiciliosCommand command, CancellationToken cancellationToken)
         {
 
-            var domicilio = new AfiliadosDomicilios(command.AfiliadoId, command.Calle, command.Altura, command.Piso, command.Departamento, command.LocalidadesId, command.CodigoPostal);
+            var direccion = new Direccion(command.Calle, command.Altura, command.Piso, command.Departamento, command.LocalidadesId, command.CodigoPostal);
+            var domicilio = new AfiliadosDomicilios(command.AfiliadoId, direccion);
 
             IEnumerable<AfiliadosDomiciliosDTO> afiliadosDomiciliosToUpdate = await _afiliadosDomiciliosQueries.GetAfiliadosDomiciliosByAfiliadoIdAsync(command.AfiliadoId);
 

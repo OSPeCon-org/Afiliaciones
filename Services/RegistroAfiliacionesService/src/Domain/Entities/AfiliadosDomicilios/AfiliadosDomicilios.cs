@@ -3,49 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.SeedWork;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Exceptions;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.ValueObjects;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
 {
     public class AfiliadosDomicilios : Entity, IAggregateRoot
     {
         public Guid AfiliadosId { get; set; }
-        public string Calle { get; set; }
-        public string Altura { get; set; }
-        public string Piso { get; set; }
-        public string Departamento { get; set; }
-        public Guid LocalidadesId { get; set; }
-        public string CodigoPostal { get; set; }
+        public Direccion Direccion { get; private set; }
         public Afiliados Afiliado { get; set; }
-        public Localidades Localidad { get; set; }
-       
+
+
         public AfiliadosDomicilios()
         {
         }
-        public AfiliadosDomicilios(Guid afiliadosId, string calle, string altura, string piso, string departamento, Guid localidadesId, string codigoPostal) : this()
+        public AfiliadosDomicilios(Guid afiliadosId, Direccion direccion) : this()
         {
-            if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La calle no puede estar vacía");
-            if (localidadesId == Guid.Empty) throw new System.InvalidOperationException("Debe Informar la localidad");
+
 
             AfiliadosId = afiliadosId;
-            Calle = calle;
-            Altura=altura;
-            Piso= piso;
-            Departamento=departamento;
-            LocalidadesId=localidadesId;
-            CodigoPostal=codigoPostal;
+            Direccion = direccion;
+
         }
-        public void Update(Guid id, Guid afiliadosId, string calle, string altura, string piso, string departamento, Guid localidadesId, string codigoPostal)
+        public void Update(Guid id, Guid afiliadosId, Direccion direccion)
         {
-            if (string.IsNullOrEmpty(calle)) throw new System.InvalidOperationException("La descripcion no puede estar vacío");
-            if (localidadesId == Guid.Empty) throw new System.InvalidOperationException("Debe Informar la localidad");
+
+
             Id = id;
             AfiliadosId = afiliadosId;
-            Calle = calle;
-            Altura=altura;
-            Piso= piso;
-            Departamento=departamento;
-            LocalidadesId=localidadesId;
-            CodigoPostal=codigoPostal;
+            Direccion = direccion;
+
         }
     }
 }
