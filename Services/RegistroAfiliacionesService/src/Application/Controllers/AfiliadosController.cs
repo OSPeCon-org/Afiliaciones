@@ -42,37 +42,23 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         [HttpGet]
         public async Task<ActionResult> GetAfiliadosAsync(Guid id)
         {
-            try
-            {
-                //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
-                //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var sector = await _afiliadosQueries.GetAfiliadosAsync(id);
+            var afiliado = await _afiliadosQueries.GetAfiliadosAsync(id);
 
-                return Ok(sector);
-            }
-            catch
-            {
-                return NotFound();
-            }
+            return Ok(afiliado);
         }
 
 
-        [Route("getByName/{descripcion}")]
+        [Route("getByName/{nombre}")]
         [HttpGet]
         public async Task<ActionResult> GetAfiliadosByNameAsync(string nombre)
         {
-            try
-            {
-                //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
-                //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-                var afiliado = await _afiliadosQueries.GetAfiliadosByNameAsync(nombre);
 
-                return Ok(afiliado);
-            }
-            catch
-            {
-                return NotFound();
-            }
+
+            var afiliados = await _afiliadosQueries.GetAfiliadosByNameAsync(nombre);
+
+            return Ok(afiliados);
+
+
         }
 
         [Route("all")]

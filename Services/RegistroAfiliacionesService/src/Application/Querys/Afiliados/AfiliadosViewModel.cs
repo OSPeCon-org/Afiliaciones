@@ -32,7 +32,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             TitularId = Guid.Empty;
         }
         public Guid Id { get; set; }
-        public NombrePropio Apellido { get; set; }
+        public string Apellido { get; set; }
         public string Nombre { get; set; }
         public Guid TipoDocumentoId { get; set; }
         public string TipoDocumentoNombre { get; set; }

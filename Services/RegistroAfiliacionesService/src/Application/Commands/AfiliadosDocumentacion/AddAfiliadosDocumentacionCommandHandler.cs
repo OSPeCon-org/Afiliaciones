@@ -6,31 +6,45 @@ using System.Threading.Tasks;
 using System;
 using OSPeConTI.Afiliaciones.BuildingBlocks.EventBus.Abstractions;
 using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.IntegrationEvents;
+using System.IO;
+using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Helper;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 {
     // Regular CommandHandler
     public class AddAfiliadosDocumentacionCommandHandler : IRequestHandler<AddAfiliadosDocumentacionCommand, Guid>
     {
-        private readonly IAfiliadosDocumentacionRepository _afiliadosDomiciliosDomiciliosRepository;
+        private readonly IAfiliadosDocumentacionRepository _afiliadosDocumentacionRepository;
         private readonly IEventBus _eventBus;
 
-        public AddAfiliadosDocumentacionCommandHandler(IAfiliadosDocumentacionRepository afiliadosDomiciliosDomiciliosRepository, IEventBus eventBus)
+        private AppSettings _appSettings;
+
+        public AddAfiliadosDocumentacionCommandHandler(IAfiliadosDocumentacionRepository afiliadosDocumentacionRepository, IEventBus eventBus, AppSettings appSettings)
         {
-            _afiliadosDomiciliosDomiciliosRepository = afiliadosDomiciliosDomiciliosRepository;
+            _afiliadosDocumentacionRepository = afiliadosDocumentacionRepository;
             _eventBus = eventBus;
+            _appSettings = appSettings;
         }
 
         public async Task<Guid> Handle(AddAfiliadosDocumentacionCommand command, CancellationToken cancellationToken)
         {
 
-            AfiliadosDocumentacion afiliadosDomiciliosDomicilios = new AfiliadosDocumentacion(command.AfiliadoId, command.DetalleDocumentacionId, command.URL, command.Aprobado);
 
-            _afiliadosDomiciliosDomiciliosRepository.Add(afiliadosDomiciliosDomicilios);
+            Guid Subfijo = Guid.NewGuid();
+            String Nombre = Subfijo.ToString() + "." + command.Tipo;
+            string Path = _appSettings.CarpetaDocumenacion;
+            String Url = _appSettings.UrlDocumentacion;
 
-            await _afiliadosDomiciliosDomiciliosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-            return afiliadosDomiciliosDomicilios.Id;
+            AfiliadosDocumentacion afiliadosDocumentacion = new AfiliadosDocumentacion(command.AfiliadoId, command.DetalleDocumentacionId, Url + Nombre, command.Aprobado);
+
+            _afiliadosDocumentacionRepository.Add(afiliadosDocumentacion);
+
+            byte[] Imagen = Convert.FromBase64String(command.Imagen);
+            await _afiliadosDocumentacionRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            File.WriteAllBytes(Path + Nombre, Imagen);
+
+            return afiliadosDocumentacion.Id;
         }
     }
 }

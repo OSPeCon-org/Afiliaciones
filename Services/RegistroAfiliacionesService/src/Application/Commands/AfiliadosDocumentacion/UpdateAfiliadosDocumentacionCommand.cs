@@ -11,13 +11,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
     {
         [DataMember]
         public Guid Id { get; set; }
-        
+
         [DataMember]
-         public  Guid AfiliadoId { get; set; }
+        public Guid AfiliadoId { get; set; }
         [DataMember]
         public Guid DetalleDocumentacionId { get; set; }
         [DataMember]
-        public string URL { get; set; }
+        public string File { get; set; }
         [DataMember]
         public bool Aprobado { get; set; }
 
@@ -27,13 +27,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
         }
 
-        public UpdateAfiliadosDocumentacionCommand(Guid id, Guid afiliadoId, Guid detalleDocumentacionId, string url, bool aprobado)
+        public UpdateAfiliadosDocumentacionCommand(Guid id, Guid afiliadoId, Guid detalleDocumentacionId, string file, bool aprobado)
 
         {
-            Id=id;
-            AfiliadoId=afiliadoId;
+            Id = id;
+            AfiliadoId = afiliadoId;
             DetalleDocumentacionId = detalleDocumentacionId;
-            URL = url;
+            File = file;
             Aprobado = aprobado;
         }
     }

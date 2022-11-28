@@ -42,7 +42,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
             if (afiliadosDomiciliosToUpdate == null) throw new NotFoundException();
 
-            afiliadosDomiciliosToUpdate.Update(command.Id, command.AfiliadoId, command.DetalleDocumentacionId, command.URL, command.Aprobado);
+            afiliadosDomiciliosToUpdate.Update(command.Id, command.AfiliadoId, command.DetalleDocumentacionId, command.File, command.Aprobado);
 
             _afiliadosDomiciliosRepository.Update(afiliadosDomiciliosToUpdate);
 
@@ -52,7 +52,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
 
             Guid transactionId = Guid.NewGuid();
-           // await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
+            // await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
             //await _afiliacionIntegrationEventService.PublishEventsThroughEventBusAsync(transactionId);
 
 

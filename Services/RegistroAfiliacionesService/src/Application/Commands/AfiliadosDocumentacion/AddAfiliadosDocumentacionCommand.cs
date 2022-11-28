@@ -9,25 +9,30 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
     [DataContract]
     public class AddAfiliadosDocumentacionCommand : IRequest<Guid>
     {
-         [DataMember]
-         public  Guid AfiliadoId { get; set; }
+        [DataMember]
+        public Guid AfiliadoId { get; set; }
         [DataMember]
         public Guid DetalleDocumentacionId { get; set; }
-        [DataMember]
-        public string URL { get; set; }
+
         [DataMember]
         public bool Aprobado { get; set; }
+        [DataMember]
+        public string Imagen { get; set; }
+        [DataMember]
+        public string Tipo { get; set; }
         public AddAfiliadosDocumentacionCommand()
         {
 
         }
-        public AddAfiliadosDocumentacionCommand(Guid afiliadoId, Guid detalleDocumentacionId, string url, bool aprobado)
+        public AddAfiliadosDocumentacionCommand(Guid afiliadoId, Guid detalleDocumentacionId, bool aprobado, string imagen, string tipo)
 
         {
-            AfiliadoId=afiliadoId;
+            AfiliadoId = afiliadoId;
             DetalleDocumentacionId = detalleDocumentacionId;
-            URL = url;
+
             Aprobado = aprobado;
+            Imagen = imagen;
+            Tipo = tipo;
         }
     }
 }
