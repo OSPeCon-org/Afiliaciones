@@ -37,6 +37,7 @@ using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.IntegrationEvents;
 using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF;
 using OSPeConTI.Afiliaciones.BuildingBlocks.IntegrationEventLogEF.Services;
 using System.Data.Common;
+using Minio;
 
 namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 {
@@ -183,6 +184,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddOdataSwaggerSupport();
             services.AddTransient<AfiliadoCreadoIntegrationEventHandler>();
             services.AddEventBus(Configuration);
+            services.AddMinio(Configuration);
 
             //services.AddOptions();
         }
@@ -260,6 +262,21 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
     static class CustomExtensionsMethods
     {
+        public static IServiceCollection AddMinio(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<MinioClient>(m =>
+            {
+                var _appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+
+                var minio = new MinioClient()
+                              .WithEndpoint(_appSettings.minioEndpoint)
+                              .WithCredentials(_appSettings.minioAccessKey, _appSettings.minioSecretKey)
+                              .Build();
+                return minio;
+            });
+            return services;
+        }
+
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
             //services.AddTransient<IIntegrationEventHandler<AfiliadoCreadoIntegrationEvent>, AfiliadoCreadoIntegrationEventHandler>();

@@ -9,15 +9,15 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public AfiliadosDocumentacionDTO()
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            AfiliadosId=Guid.Parse("00000000-0000-0000-0000-000000000000");
-            DocumentacionId=Guid.Parse("00000000-0000-0000-0000-000000000000");
-            DetalleDocumentacionId=Guid.Parse("00000000-0000-0000-0000-000000000000");
+            AfiliadosId = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            DocumentacionId = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            DetalleDocumentacionId = Guid.Parse("00000000-0000-0000-0000-000000000000");
             URL = "";
             Aprobado = false;
             Apellido = "";
-            Nombre="";
-            Documentacion="";
-           
+            Nombre = "";
+            Documentacion = "";
+
         }
         public Guid Id { get; set; }
         public Guid AfiliadosId { get; set; }
@@ -28,9 +28,10 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
         public string Apellido { get; set; }
         public string Nombre { get; set; }
         public string Documentacion { get; set; }
+        public int Estado { get; set; }
 
-        
-        
+
+
 
 
     }

@@ -26,6 +26,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="MimeKit" Version="2.9.2" />
+    <PackageReference Include="minio" Version="4.0.6" />
     
     <PackageReference Include="OData.Swagger" Version="1.0.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />

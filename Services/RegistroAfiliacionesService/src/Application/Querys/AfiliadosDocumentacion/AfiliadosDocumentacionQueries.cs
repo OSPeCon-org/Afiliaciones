@@ -25,7 +25,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                   @"SELECT  SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.URL, ad.Aprobado, d.Descripcion as Documentacion, case 
+                   @"SELECT  SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.URL, ad.estado, d.Descripcion as Documentacion, case 
                     FROM dbo.AfiliadosDocumentacion ad inner join Afiliados a on ad.AfiliadosId=a.Id 
                     inner join dbo.DetalleDocumentacion dd on a.DetalleDocumentacionId=dd.Id
                     inner join dbo.Documentacion d on dd.DocumentacionId=d.Id
@@ -49,7 +49,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                @"SELECT  SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.URL, ad.Aprobado, d.Descripcion as Documentacion, case 
+                @"SELECT  SELECT  ad.Id, ad.AfiliadosId, a.Apellido, a.Nombre, ad.URL, ad.Estado, d.Descripcion as Documentacion, case 
                     FROM dbo.AfiliadosDocumentacion ad inner join Afiliados a on ad.AfiliadosId=a.Id 
                     inner join dbo.DetalleDocumentacion dd on a.DetalleDocumentacionId=dd.Id
                     inner join dbo.Documentacion d on dd.DocumentacionId=d.Id
@@ -66,7 +66,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
         }
 
-        
+
 
         public async Task<IEnumerable<AfiliadosDocumentacionDTO>> GetDocumentacion(Guid afiliadoId)
 
@@ -75,26 +75,26 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
             {
                 connection.Open();
 
-               /*  var multiple = await connection.QueryMultipleAsync(
-                @"Select ad.Id, d.Descripcion as Documentacion, d.id as DetalleDocumentacionId, ad.DocumentacionId, ad.Aprobado, 
-					ad.URL, a.Apellido, a.Nombre, d.Descripcion as Documento 
-					from DetalleDocumentacion dd left join 
-					(select * from  AfiliadosDocumentacion ad where ad.AfiliadosId=@afiliadoId)
-					ad on dd.id=ad.DetalleDocumentacionId
-					left join afiliados a on a.id=ad.AfiliadosId
-					left join Documentacion d on dd.DocumentacionId=d.id"
-                    , new { afiliadoId }); */
+                /*  var multiple = await connection.QueryMultipleAsync(
+                 @"Select ad.Id, d.Descripcion as Documentacion, d.id as DetalleDocumentacionId, ad.DocumentacionId, ad.Aprobado, 
+                     ad.URL, a.Apellido, a.Nombre, d.Descripcion as Documento 
+                     from DetalleDocumentacion dd left join 
+                     (select * from  AfiliadosDocumentacion ad where ad.AfiliadosId=@afiliadoId)
+                     ad on dd.id=ad.DetalleDocumentacionId
+                     left join afiliados a on a.id=ad.AfiliadosId
+                     left join Documentacion d on dd.DocumentacionId=d.id"
+                     , new { afiliadoId }); */
 
-                  var multiple = await connection.QueryMultipleAsync(
-                  @"with Documentos as
+                var multiple = await connection.QueryMultipleAsync(
+                @"with Documentos as
                     (select dd.*, d.Descripcion as documento, a.Id as afiliadoid , a.Nombre, a.Apellido
                     from DetalleDocumentacion dd inner join Documentacion d on dd.DocumentacionId=d.Id
                     inner join Afiliados a on a.PlanId=dd.PlanId and a.ParentescoId=dd.ParentescoId
                     where a.Id=@afiliadoId)
-                    select d.Id, doc.documento as Documentacion, d.id as DetalleDocumentacionId, d.DocumentacionId, d.Aprobado, 
+                    select d.Id, doc.documento as Documentacion, d.id as DetalleDocumentacionId, d.DocumentacionId, d.Estado, 
                                         d.URL, doc.Apellido, doc.Nombre
                     from Documentos doc left join AfiliadosDocumentacion d on doc.afiliadoid=d.AfiliadosId and doc.Id=d.DetalleDocumentacionId"
-                    , new { afiliadoId });    
+                  , new { afiliadoId });
 
                 var afiliado = multiple.Read<AfiliadosDocumentacionDTO>().ToList();
 
@@ -103,9 +103,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 return afiliado;
             }
-            
+
         }
-       
+
 
 
     }
