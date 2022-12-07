@@ -35,11 +35,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         public async Task<ActionResult> GetAfiliadosDocumentacionAsync(Guid id)
         {
 
-            //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
-            //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-            var sector = await _afiliadosDocumentacionQueries.GetAfiliadosDocumentacionAsync(id);
+            var documento = await _afiliadosDocumentacionQueries.GetByIdAsync(id);
 
-            return Ok(sector);
+            return Ok(documento);
 
         }
 
@@ -50,26 +48,9 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         {
 
 
-            //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
-            //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-            var afiliado = await _afiliadosDocumentacionQueries.GetAfiliadosDocumentacionByAfiliadoIdAsync(afiliadoId);
+            var documentos = await _afiliadosDocumentacionQueries.GetByAfiliadoIdAsync(afiliadoId);
 
-            return Ok(afiliado);
-
-        }
-
-        [Route("getByDocumentacionAfiliado/{afiliadoId}")]
-        [HttpGet]
-        public async Task<ActionResult> GetAfiliadosDocumentacionAfiliado(Guid afiliadoId)
-        {
-
-
-            //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
-            //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
-            var afiliado = await _afiliadosDocumentacionQueries.GetDocumentacion(afiliadoId);
-
-            return Ok(afiliado);
-
+            return Ok(documentos);
 
         }
 
