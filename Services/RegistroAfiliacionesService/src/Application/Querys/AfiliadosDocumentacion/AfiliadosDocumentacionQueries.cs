@@ -50,14 +50,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                 connection.Open();
 
                 var multiple = await connection.QueryMultipleAsync(
-                /* @"with Documentos as
-                    (select dd.*, d.Descripcion as documento, a.Id as afiliadoid , a.Nombre, a.Apellido
-                    from DetalleDocumentacion dd inner join Documentacion d on dd.DocumentacionId=d.Id
-                    inner join Afiliados a on a.PlanId=dd.PlanId and a.ParentescoId=dd.ParentescoId
-                    where a.Id=@afiliadoId)
-                    select d.Id, doc.documento as Documentacion, d.id as DetalleDocumentacionId, d.DocumentacionId, d.Estado, 
-                                        d.URL, doc.Apellido, doc.Nombre
-                    from Documentos doc left join AfiliadosDocumentacion d on doc.afiliadoid=d.AfiliadosId and doc.Id=d.DetalleDocumentacionId" */
                     @"with Documentos as 
                     (select dd.*, d.Descripcion as documento, a.Id as afiliadoid , a.Nombre, a.Apellido
                         from DetalleDocumentacion dd 
@@ -81,7 +73,6 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 return afiliado;
             }
-
         }
     }
 
