@@ -185,6 +185,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             services.AddTransient<AfiliadoCreadoIntegrationEventHandler>();
             services.AddEventBus(Configuration);
             services.AddMinio(Configuration);
+            services.AddCors();
 
             //services.AddOptions();
         }
@@ -219,10 +220,13 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             app.UseRouting();
 
+            var origins = new string[] { "https://front.uocra.net" };
+            var headers = new string[] { "access-control-allow-origin", "authorization", "content-type" };
+
             app.UseCors(x => x
-               .AllowAnyOrigin()
+               .WithOrigins(origins)
                .AllowAnyMethod()
-               .AllowAnyHeader());
+               .WithHeaders(headers));
 
             app.UseAuthentication();
             app.UseAuthorization();
