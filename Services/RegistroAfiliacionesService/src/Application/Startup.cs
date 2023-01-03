@@ -220,13 +220,10 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
 
             app.UseRouting();
 
-            var origins = new string[] { "https://front.uocra.net" };
-            var headers = new string[] { "access-control-allow-origin", "authorization", "content-type" };
-
             app.UseCors(x => x
-               .WithOrigins(origins)
+               .AllowAnyOrigin()
                .AllowAnyMethod()
-               .WithHeaders(headers));
+               .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
