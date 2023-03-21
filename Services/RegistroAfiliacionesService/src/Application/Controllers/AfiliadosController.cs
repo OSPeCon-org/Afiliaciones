@@ -26,6 +26,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
         private readonly UsuarioAfiliadosRepository _usuarioAfiliadosRepository;
 
 
+
+
         public AfiliadosController(
             IMediator mediator,
             ILogger<AfiliadosController> logger,
@@ -36,6 +38,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _afiliadosQueries = afiliados ?? throw new ArgumentNullException(nameof(afiliados));
             _usuarioAfiliadosRepository = usuarioAfiliadosRepository;
+
         }
 
         [Route("{id}")]
@@ -124,5 +127,50 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application
             }
         }
 
+        [Route("aprobar/{id}")]
+        [HttpGet]
+        public async Task<bool> Aprobar(Guid id)
+        {
+            try
+            {
+                AprobarAfiliadosCommand command = new AprobarAfiliadosCommand();
+                command.Id = id;
+                bool commandResult = await _mediator.Send(command);
+                return commandResult;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [Route("rechazar/{id}")]
+        [HttpGet]
+        public async Task<bool> Rechazar(Guid id)
+        {
+            try
+            {
+                RechazarAfiliadosCommand command = new RechazarAfiliadosCommand();
+                command.Id = id;
+                bool commandResult = await _mediator.Send(command);
+                return commandResult;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [Route("pendientes")]
+        [HttpGet]
+        public async Task<ActionResult> GetPendientes()
+        {
+            //try
+            //{
+            //Todo: It's good idea to take advantage of GetOrderByIdQuery and handle by GetCustomerByIdQueryHandler
+            //var order customer = await _mediator.Send(new GetOrderByIdQuery(orderId));
+            var afiliados = await _afiliadosQueries.GetPendientes();
+            return Ok(afiliados);
+        }
     }
 }

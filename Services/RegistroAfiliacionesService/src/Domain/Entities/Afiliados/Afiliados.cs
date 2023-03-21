@@ -72,5 +72,16 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             TitularId = titularId;
             this.AddDomainEvent(new AfiliadosActualizadoRequested(this));
         }
+
+
+        public void Aprobar()
+        {
+            EstadosAfiliacionId = new Guid("7C1AB25A-B284-4C2B-B287-66B11E240AED");
+        }
+
+        public void Rechazar()
+        {
+            EstadosAfiliacionId = new Guid("18D7743F-AD50-490A-A6B6-C68925DEF043");
+        }
     }
 }
