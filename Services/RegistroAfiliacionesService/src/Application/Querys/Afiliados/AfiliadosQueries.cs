@@ -186,7 +186,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
                     inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
-                    where a.EstadosAfiliacionId='7C1AB25A-B284-4C2B-B287-66B11E240AED'
+                    where a.EstadosAfiliacionId='C63BF6E4-2CE2-4060-8E41-80847CE25E9F'
                     Order by a.Apellido, a.Nombre;");
 
                 var afiliados = multiple.Read<AfiliadosDTO>().ToList();
