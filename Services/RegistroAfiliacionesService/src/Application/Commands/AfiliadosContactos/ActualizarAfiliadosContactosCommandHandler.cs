@@ -43,7 +43,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(ActualizarAfiliadosContactosCommand command, CancellationToken cancellationToken)
         {
 
-            var contacto = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2);
+            var contacto = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2, command.CemapReferencia);
 
             IEnumerable<AfiliadosContactosDTO> afiliadosContactosToUpdate = await _afiliadosContactosQueries.GetAfiliadosContactosByAfiliadoIdAsync(command.AfiliadosId);
 

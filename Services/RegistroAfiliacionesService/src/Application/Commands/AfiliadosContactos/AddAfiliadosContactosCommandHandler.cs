@@ -24,7 +24,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public async Task<Guid> Handle(AddAfiliadosContactosCommand command, CancellationToken cancellationToken)
         {
 
-            AfiliadosContactos afiliadosContactos = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2);
+            AfiliadosContactos afiliadosContactos = new AfiliadosContactos(command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2, command.CemapReferencia);
 
             _afiliadosContactosRepository.Add(afiliadosContactos);
             await _afiliadosContactosRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);

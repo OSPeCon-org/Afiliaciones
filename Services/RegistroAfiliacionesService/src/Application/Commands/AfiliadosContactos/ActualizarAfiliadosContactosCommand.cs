@@ -25,6 +25,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
         public Email Mail { get; set; }
         [DataMember]
         public Email Mail2 { get; set; }
+        [DataMember]
+        public int CemapReferencia { get; set; }
 
 
         public ActualizarAfiliadosContactosCommand()
@@ -32,7 +34,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
         }
 
-        public ActualizarAfiliadosContactosCommand(Guid id, Guid afiliadosId, string celular, string particular, string laboral, Email mail, Email mail2)
+        public ActualizarAfiliadosContactosCommand(Guid id, Guid afiliadosId, string celular, string particular, string laboral, Email mail, Email mail2, int cemapReferencia)
 
         {
             Id = Id;
@@ -42,6 +44,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
             Laboral = laboral;
             Mail = mail;
             Mail2 = mail2;
+            CemapReferencia = cemapReferencia;
 
 
         }

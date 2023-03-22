@@ -42,7 +42,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
             if (afiliadosContactosToUpdate == null) throw new NotFoundException();
 
-            afiliadosContactosToUpdate.Update(command.Id, command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2);
+            afiliadosContactosToUpdate.Update(command.Id, command.AfiliadosId, command.Celular, command.Particular, command.Laboral, command.Mail, command.Mail2, command.CemapReferencia);
 
             _afiliadosContactosRepository.Update(afiliadosContactosToUpdate);
 
@@ -52,7 +52,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Commands
 
 
             Guid transactionId = Guid.NewGuid();
-           // await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
+            // await _afiliacionIntegrationEventService.AddAndSaveEventAsync(evento, transactionId);
             //await _afiliacionIntegrationEventService.PublishEventsThroughEventBusAsync(transactionId);
 
 
