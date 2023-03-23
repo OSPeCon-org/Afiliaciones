@@ -25,14 +25,16 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
         public Guid EstadoCivilId { get; set; }
         public bool Discapacitado { get; set; }
         public Guid NacionalidadId { get; set; }
-        public Guid EstadosAfiliacionId { get; set; }
+        public int EstadosAfiliacionId { get; set; }
         public TipoDocumento TipoDocumento { get; set; }
         public Parentescos Parentesco { get; set; }
         public Planes Plan { get; set; }
         public EstadosCiviles EstadoCivil { get; set; }
         public Nacionalidades Nacionalidad { get; set; }
-        public EstadosAfiliacion EstadoAfiliacion { get; set; }
         public Afiliados Titular { get; set; }
+
+
+
 
 
 
@@ -41,7 +43,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
 
         }
 
-        public Afiliados(Guid id, NombrePropio apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, Cuit cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid estadosAfiliacionId, Guid titularId)
+        public Afiliados(Guid id, NombrePropio apellido, string nombre, Guid tipoDocumentoId, int documento, Guid parentescoId, Cuit cuil, DateTime fechaNacimiento, Guid planId, string sexo, Guid estadoCivilId, bool discapacitado, Guid nacionalidadId, Guid titularId)
         {
 
             if (string.IsNullOrEmpty(nombre)) throw new System.InvalidOperationException("El nombre no puede estar vacío");
@@ -52,7 +54,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             //if (string.IsNullOrEmpty(cuil)) throw new System.InvalidOperationException("El CUIL no puede estar vacío");
             if (planId == Guid.Empty) throw new System.InvalidOperationException("El Plan no puede estar vacío");
             if (nacionalidadId == Guid.Empty) throw new System.InvalidOperationException("La Nacionalidad no puede estar vacío");
-            if (estadosAfiliacionId == Guid.Empty) throw new System.InvalidOperationException("El Estado de Afiliacion no puede estar vacío");
+            //if (estadosAfiliacionId == Guid.Empty) throw new System.InvalidOperationException("El Estado de Afiliacion no puede estar vacío");
 
             Id = id;
             Apellido = apellido;
@@ -68,7 +70,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
             EstadoCivilId = estadoCivilId;
             Discapacitado = discapacitado;
             NacionalidadId = nacionalidadId;
-            EstadosAfiliacionId = estadosAfiliacionId;
+            EstadosAfiliacionId = EstadosAfiliacion.EnProcesoCarga.Id;
             TitularId = titularId;
             this.AddDomainEvent(new AfiliadosActualizadoRequested(this));
         }
@@ -76,12 +78,26 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities
 
         public void Aprobar()
         {
-            EstadosAfiliacionId = new Guid("7C1AB25A-B284-4C2B-B287-66B11E240AED");
+            EstadosAfiliacionId = EstadosAfiliacion.Aprobado.Id;
         }
 
         public void Rechazar()
         {
-            EstadosAfiliacionId = new Guid("18D7743F-AD50-490A-A6B6-C68925DEF043");
+            EstadosAfiliacionId = EstadosAfiliacion.Rechazado.Id;
         }
+
+        public void pasarAPendiente()
+        {
+            EstadosAfiliacionId = EstadosAfiliacion.Pendiente.Id;
+        }
+        public void Observar()
+        {
+            EstadosAfiliacionId = EstadosAfiliacion.Observado.Id;
+        }
+        public void pasarAEnProceso()
+        {
+            EstadosAfiliacionId = EstadosAfiliacion.EnProcesoCarga.Id;
+        }
+
     }
 }

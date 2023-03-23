@@ -28,7 +28,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
         public DbSet<TipoDocumento> TipoDocumento { get; set; }
         public DbSet<Provincias> Provincias { get; set; }
         public DbSet<Localidades> Localidades { get; set; }
-        public DbSet<EstadosAfiliacion> EstadosAfiliacion { get; set; }
+        //public DbSet<EstadosAfiliacion> EstadosAfiliacion { get; set; }
         public DbSet<Documentacion> Documentacion { get; set; }
         public DbSet<DetalleDocumentacion> DetalleDocumentacion { get; set; }
         public DbSet<AfiliadosDomicilios> AfiliadosDomicilios { get; set; }
@@ -63,7 +63,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Infrastructure
             modelBuilder.ApplyConfiguration(new TipoDocumentoEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinciasEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocalidadesEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new EstadosAfiliacionEntityTypeConfiguration());
+            // modelBuilder.ApplyConfiguration(new EstadosAfiliacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DetalleDocumentacionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AfiliadosDomiciliosEntityTypeConfiguration());

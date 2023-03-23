@@ -6,6 +6,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
     using System.Data.SqlClient;
     using System.Threading.Tasks;
     using System.Linq;
+    using OSPeConTI.Afiliaciones.RegistroAfiliaciones.Domain.Entities;
 
     public class AfiliadosQueries
         : IAfiliadosQueries
@@ -29,13 +30,12 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     where a.Id = @id;"
                     , new { id });
 
@@ -43,7 +43,7 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 if (afiliado == null)
                     throw new KeyNotFoundException();
-
+                afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
                 return afiliado;
             }
         }
@@ -60,22 +60,26 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     where ltrim(rtrim(a.Apellido)) + ' ' + ltrim(rtrim(a.Nombre)) like '%' + @nombre + '%' Order by a.Apellido, a.Nombre ;"
                     , new { nombre });
 
-                var afiliado = multiple.Read<AfiliadosDTO>().ToList();
+                var afiliados = multiple.Read<AfiliadosDTO>().ToList();
 
-                if (afiliado == null)
+                if (afiliados == null)
                     throw new KeyNotFoundException();
 
-                return afiliado;
+                foreach (var afiliado in afiliados)
+                {
+                    afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
+                }
+
+                return afiliados;
             }
         }
 
@@ -90,16 +94,19 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     Order by a.Apellido, a.Nombre;");
 
                 var afiliados = multiple.Read<AfiliadosDTO>().ToList();
+                foreach (var afiliado in afiliados)
+                {
+                    afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
+                }
 
                 return afiliados;
             }
@@ -117,18 +124,21 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                      where a.titularId = @titularId;"
                     , new { titularId }
                     );
 
                 var afiliados = multiple.Read<AfiliadosDTO>().ToList();
+                foreach (var afiliado in afiliados)
+                {
+                    afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
+                }
 
                 return afiliados;
             }
@@ -147,13 +157,12 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
                     where a.Cuil = @cuil Order by a.FechaAlta desc;"
                     , new { cuil });
 
@@ -161,6 +170,8 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
 
                 if (afiliado == null)
                     throw new KeyNotFoundException();
+
+                afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
 
                 return afiliado;
             }
@@ -179,17 +190,21 @@ namespace OSPeConTI.Afiliaciones.RegistroAfiliaciones.Application.Queries
                    a.Documento, a.ParentescoId, p.Descripcion as ParentescoNombre, a.CUIL, a.FechaNacimiento, a.Fecha,
                    a.PlanId, pl.Descripcion as PlanNombre, a.Sexo, a.EstadoCivilId, e.Descripcion as EstadoCivilNombre,
                    a.Discapacitado, a.NacionalidadId, n.Descripcion as NacionalidadNombre, a.EstadosAfiliacionId, 
-                   ea.Descripcion as EstadosAfiliacionNombre, TitularId
+                   '' as EstadosAfiliacionNombre, TitularId
                     FROM     dbo.Afiliados a inner join TipoDocumento d on a.TipoDocumentoId=d.Id 
                     inner join Parentescos p on a.ParentescoId=p.Id
                     inner join Planes pl on a.PlanId=pl.Id
                     inner join EstadosCiviles e on a.EstadoCivilId=e.Id
                     inner join Nacionalidades n on a.NacionalidadId=n.Id 
-                    inner join EstadosAfiliacion ea on a.EstadosAfiliacionId=ea.Id
-                    where a.EstadosAfiliacionId='C63BF6E4-2CE2-4060-8E41-80847CE25E9F'
-                    Order by a.Apellido, a.Nombre;");
+                    where a.EstadosAfiliacionId='" + EstadosAfiliacion.Pendiente.Id.ToString() +
+                    "' Order by a.Apellido, a.Nombre; ");
 
                 var afiliados = multiple.Read<AfiliadosDTO>().ToList();
+
+                foreach (var afiliado in afiliados)
+                {
+                    afiliado.EstadosAfiliacionNombre = EstadosAfiliacion.From(afiliado.EstadosAfiliacionId).Nombre;
+                }
 
                 return afiliados;
             }
